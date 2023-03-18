@@ -1,9 +1,0 @@
-<!DOCTYPE RCC><RCC version="1.0">
-    <qresource>
-        <file>../assets/image/bronze.JPG</file>
-        <file>../assets/image/front.JPG</file>
-        <file>../assets/image/gold.JPG</file>
-        <file>../assets/image/silver.JPG</file>
-        <file>../assets/image/home.png</file>
-    </qresource>
-</RCC>

@@ -346,7 +346,11 @@ compiler_rcc_clean:
 	-$(DEL_FILE) qrc_resources.cpp
 qrc_resources.cpp: resources.qrc \
 		/usr/lib/qt5/bin/rcc \
-		../assets/image/home.png
+		../assets/image/silver.JPG \
+		../assets/image/gold.jpg \
+		../assets/image/home.png \
+		../assets/image/bronze.JPG \
+		../assets/image/front.JPG
 	/usr/lib/qt5/bin/rcc -name resources resources.qrc -o qrc_resources.cpp
 
 compiler_moc_predefs_make_all: moc_predefs.h
