@@ -1,12 +1,12 @@
 #include <QApplication>
-#include "window.h"
+#include "menu.h"
 
 int main(int argc, char **argv)
 {
- QApplication app (argc, argv);
+ QApplication app(argc, argv);
 
- Window window;
- window.show();
+ Menu menu;
+ menu.show();
 
  return app.exec();
 }
