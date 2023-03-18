@@ -10,5 +10,5 @@ HEADERS += menu.h
 
 SOURCES += main.cpp menu.cpp
 
-RESOURCES += resources.qrc
+RESOURCES += src.qrc
 
