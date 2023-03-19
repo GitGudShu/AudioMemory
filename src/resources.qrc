@@ -1,5 +1,5 @@
 <!DOCTYPE RCC><RCC version="1.0">
-    <qresource prefix="/">
+    <qresource>
         <file>../assets/image/bronze.JPG</file>
         <file>../assets/image/front.JPG</file>
         <file>../assets/image/gold.jpg</file>

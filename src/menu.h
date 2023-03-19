@@ -7,6 +7,8 @@
 
 class Menu : public QWidget
 {
+   Q_OBJECT
+
  public:
     Menu(QWidget *parent = nullptr);
 
@@ -17,7 +19,6 @@ class Menu : public QWidget
  private:
     QPushButton *startButton;
     QPushButton *exitButton;
-    QLabel *background;
 };
 
 #endif // WINDOW_H
