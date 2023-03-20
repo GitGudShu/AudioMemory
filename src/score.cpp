@@ -16,7 +16,7 @@ int writeScore(float score){
     return 0;
 }
 
-void readScore(list<string> tab) {
+void readScore(std::list<std::string> tab) {
     ofstream file;
     file.open("score.txt");
     string s;
