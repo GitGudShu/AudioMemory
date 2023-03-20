@@ -5,6 +5,7 @@
 #include <QPushButton>
 #include <QGridLayout>
 #include <QLabel>
+#include <QMediaPlayer>
 
 class Menu : public QWidget
 {
@@ -23,6 +24,7 @@ class Menu : public QWidget
     QLabel *score;
     QGridLayout *layout;
     QLabel *backgroundLabel;
+    QMediaPlayer *player;
 };
 
 #endif // WINDOW_H

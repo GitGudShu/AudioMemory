@@ -42,10 +42,12 @@ Menu::Menu(QWidget *parent) :
    connect(exitButton, &QPushButton::clicked, this, &Menu::exit);
 
    // Create and set the score box
+   /*
    score = new QLabel(this);
    QString tab = "";
    score::readScore(tab);
    score->setText(tab);
+  */
 
    // Set the button size
    int buttonWidth = width * 0.2;  // 20% of window width
@@ -64,7 +66,7 @@ Menu::Menu(QWidget *parent) :
  void Menu::startGame()
  {
    // levels here
-   QMediaPlayer *player = new QMediaPlayer;   
+   player = new QMediaPlayer;   
    player->setMedia(QUrl::fromLocalFile("../assets/audio/artoria.mp3"));
    player->play();
  }
