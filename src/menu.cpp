@@ -49,10 +49,11 @@ Menu::Menu(QWidget *parent) :
    startButton->setFixedSize(buttonWidth, buttonHeight);
    exitButton->setFixedSize(buttonWidth, buttonHeight);
 
-   layout = new QVBoxLayout(this);
-   layout->addWidget(startButton, 0, Qt::AlignHCenter | Qt::AlignVCenter);
-   layout->addWidget(exitButton, 0, Qt::AlignHCenter | Qt::AlignVCenter);
-   layout->addWidget(scores, 0, Qt::AlignHLeft | Qt::AlignVTop);
+
+   layout = new QGridLayout(this);
+   layout->addWidget(score, 0, 0, 0, 1, Qt::AlignHCenter | Qt::AlignVCenter);
+   layout->addWidget(startButton, 0, 1, Qt::AlignHCenter | Qt::AlignVCenter);
+   layout->addWidget(exitButton, 1, 1, Qt::AlignHCenter | Qt::AlignVCenter);
    layout->setContentsMargins(0, 0, 0, 0);
  }
 

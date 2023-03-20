@@ -3,7 +3,7 @@
 
 #include <QWidget>
 #include <QPushButton>
-#include <QVBoxLayout>
+#include <QGridLayout>
 #include <QLabel>
 
 class Menu : public QWidget
@@ -21,7 +21,7 @@ class Menu : public QWidget
     QPushButton *startButton;
     QPushButton *exitButton;
     QLabel *scores;
-    QVBoxLayout *layout;
+    QGridLayout *layout;
     QLabel *backgroundLabel;
 };
 
