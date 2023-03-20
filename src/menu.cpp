@@ -41,7 +41,7 @@ Menu::Menu(QWidget *parent) :
 
    // Create and set the score box
    score = new QLabel(this);
-   std::list<std::string> tab = {};
+   QString tab = new QString;
    readScore(tab);
    score->setText(tab);
 
