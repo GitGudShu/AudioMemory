@@ -3,7 +3,7 @@
 
 #include <QWidget>
 #include <QPushButton>
-#include <QVBoxLayout>
+#include <QGridLayout>
 #include <QLabel>
 
 class Menu : public QWidget
@@ -20,8 +20,9 @@ class Menu : public QWidget
  private:
     QPushButton *startButton;
     QPushButton *exitButton;
-    QVBoxLayout *layout;
+    QGridLayout *layout;
     QLabel *backgroundLabel;
+    QLabel *score;
 };
 
 #endif // WINDOW_H
