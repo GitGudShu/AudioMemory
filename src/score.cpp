@@ -3,12 +3,10 @@
 //
 
 #include "score.h"
-#include <string>
+#include <QString>
 #include <iostream>
 #include <fstream>
-#include <QtWidgets>
 using namespace std;
-QLabel score = new QLabel();
 
 int writeScore(float score){
     ofstream myfile;
@@ -18,12 +16,10 @@ int writeScore(float score){
     return 0;
 }
 
-int readScore() {
+void readScore(QString tab) {
+    tab.clear();
     ofstream file;
     file.open("score.txt");
-    while(!EOF){
-        score << line << '\n'
-    }
+    tab << file;
     file.close();
-    return 0;
 }

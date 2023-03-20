@@ -1,7 +1,8 @@
 #include <QApplication>
 #include <QtWidgets>
-#include <QSoundEffect>
+#include <QString>
 #include "menu.h"
+#include "score.h"
 
 Menu::Menu(QWidget *parent) :
  QWidget(parent)
@@ -40,13 +41,18 @@ Menu::Menu(QWidget *parent) :
    exitButton->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
    connect(exitButton, &QPushButton::clicked, this, &Menu::exit);
 
+   // Create and set the score box
+   score = new QLabel(this);
+   QString tab = "";
+   score::readScore(tab);
+   score->setText(tab);
+
    // Set the button size
    int buttonWidth = width * 0.2;  // 20% of window width
    int buttonHeight = height * 0.1;  // 10% of window height
    startButton->setFixedSize(buttonWidth, buttonHeight);
    exitButton->setFixedSize(buttonWidth, buttonHeight);
 
-   score = new QLabel(this);
 
    layout = new QGridLayout(this);
    layout->addWidget(score, 0, 0, 0, 1, Qt::AlignHCenter | Qt::AlignVCenter);

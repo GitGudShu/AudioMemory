@@ -20,9 +20,9 @@ class Menu : public QWidget
  private:
     QPushButton *startButton;
     QPushButton *exitButton;
+    QLabel *score;
     QGridLayout *layout;
     QLabel *backgroundLabel;
-    QLabel *score;
 };
 
 #endif // WINDOW_H
