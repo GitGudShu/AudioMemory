@@ -6,9 +6,7 @@
 #include <string>
 #include <iostream>
 #include <fstream>
-#include <QtWidgets>
 using namespace std;
-QLabel score = new QLabel();
 
 int writeScore(float score){
     ofstream myfile;
@@ -18,12 +16,14 @@ int writeScore(float score){
     return 0;
 }
 
-int readScore() {
+list<string> readScore() {
     ofstream file;
     file.open("score.txt");
+    list<string> tab;
+    string s;
     while(!EOF){
-        score << line << '\n'
+        tab.push_back(s);
     }
     file.close();
-    return 0;
+    return tab;
 }

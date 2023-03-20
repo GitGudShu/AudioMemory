@@ -1,6 +1,7 @@
 #include <QApplication>
 #include <QtWidgets>
 #include "menu.h"
+#include "score.h"
 
 Menu::Menu(QWidget *parent) :
  QWidget(parent)
@@ -38,6 +39,10 @@ Menu::Menu(QWidget *parent) :
    exitButton->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
    connect(exitButton, &QPushButton::clicked, this, &Menu::exit);
 
+   // Create and set the score box
+    score = new QLabel(this);
+    score->setText(readScore());
+
    // Set the button size
    int buttonWidth = width * 0.2;  // 20% of window width
    int buttonHeight = height * 0.1;  // 10% of window height
@@ -47,6 +52,7 @@ Menu::Menu(QWidget *parent) :
    layout = new QVBoxLayout(this);
    layout->addWidget(startButton, 0, Qt::AlignHCenter | Qt::AlignVCenter);
    layout->addWidget(exitButton, 0, Qt::AlignHCenter | Qt::AlignVCenter);
+   layout->addWidget(scores, 0, Qt::AlignHLeft | Qt::AlignVTop);
    layout->setContentsMargins(0, 0, 0, 0);
  }
 

@@ -20,6 +20,7 @@ class Menu : public QWidget
  private:
     QPushButton *startButton;
     QPushButton *exitButton;
+    QLabel *scores;
     QVBoxLayout *layout;
     QLabel *backgroundLabel;
 };
