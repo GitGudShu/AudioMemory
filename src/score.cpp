@@ -3,7 +3,7 @@
 //
 
 #include "score.h"
-#include <string>
+#include <QString>
 #include <iostream>
 #include <fstream>
 using namespace std;
@@ -16,12 +16,10 @@ int writeScore(float score){
     return 0;
 }
 
-void readScore(std::list<std::string> tab) {
+void readScore(QString tab) {
+
     ofstream file;
     file.open("score.txt");
-    string s;
-    while(!EOF){
-        tab.push_back(s);
-    }
+    tab << file;
     file.close();
 }
