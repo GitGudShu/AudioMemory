@@ -8,8 +8,8 @@ Menu::Menu(QWidget *parent) :
    // Window parameters
    setWindowTitle("FGO Audio Memory");
    QRect screenGeometry = QApplication::desktop()->screenGeometry();
-   int width = screenGeometry.width() * 0.6;  // 60% of screen width
-   int height = screenGeometry.height() * 0.6;  // 60% of screen height
+   int width = screenGeometry.width() * 0.75;  // 75% of screen width
+   int height = screenGeometry.height() * 0.75;  // 75% of screen height
    setFixedSize(width, height);
 
    // Background image
