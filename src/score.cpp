@@ -17,6 +17,7 @@ int writeScore(float score){
 }
 
 void readScore(QString tab) {
+    tab.clear();
     ofstream file;
     file.open("score.txt");
     tab << file;
