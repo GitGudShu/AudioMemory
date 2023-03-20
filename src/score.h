@@ -4,12 +4,14 @@
 
 #ifndef AUDIOMEMORY_SCORE_H
 #define AUDIOMEMORY_SCORE_H
-
+#include <string>
+#include <iostream>
+#include <fstream>
 
 class score {
 public:
     int writeScore(float score);
-    list readScore();
+    list<string> readScore();
 };
 
 
