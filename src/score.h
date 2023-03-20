@@ -9,7 +9,7 @@
 class score {
 public:
     int writeScore(float score);
-    list<string> readScore();
+    list readScore();
 };
 
 
