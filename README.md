@@ -16,14 +16,21 @@ git clone https://github.com/GitGudShu/AudioMemory.git
 
 3. Open a terminal or command prompt and navigate to the project directory.
 
-4. Run the following commands to build the project
+4. If you don't have the qt mutlimedia module:
+
+```bash
+sudo apt update
+sudo apt-get install qtmultimedia5-dev
+```
+
+5. Run the following commands to build the project
 
 ```bash
 qmake
 make
 ```
 
-5. Once the project has been built, you can launch the game by running the following command:
+6. Once the project has been built, you can launch the game by running the following command:
 
 ```bash
 ./memoryaudio

@@ -1,5 +1,6 @@
 #include <QApplication>
 #include <QtWidgets>
+#include <QSoundEffect>
 #include "menu.h"
 
 Menu::Menu(QWidget *parent) :
@@ -24,6 +25,7 @@ Menu::Menu(QWidget *parent) :
       backgroundLabel->setAlignment(Qt::AlignCenter);
       backgroundLabel->setGeometry(0, 0, width, height);
    }
+   
     
    // Buttons
    startButton = new QPushButton(tr("START"), this);
@@ -56,6 +58,9 @@ Menu::Menu(QWidget *parent) :
  void Menu::startGame()
  {
    // levels here
+   QMediaPlayer *player = new QMediaPlayer;   
+   player->setMedia(QUrl::fromLocalFile("../assets/audio/artoria.mp3"));
+   player->play();
  }
 
  void Menu::exit()
