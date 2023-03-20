@@ -11,7 +11,7 @@
 class score {
 public:
     int writeScore(float score);
-    void readScore();
+    void readScore(QString tab);
 };
 
 
