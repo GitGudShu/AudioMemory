@@ -16,14 +16,12 @@ int writeScore(float score){
     return 0;
 }
 
-list<string> readScore() {
+void readScore(list<string> tab) {
     ofstream file;
     file.open("score.txt");
-    list<string> tab;
     string s;
     while(!EOF){
         tab.push_back(s);
     }
     file.close();
-    return tab;
 }

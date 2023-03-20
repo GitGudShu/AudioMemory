@@ -40,8 +40,10 @@ Menu::Menu(QWidget *parent) :
    connect(exitButton, &QPushButton::clicked, this, &Menu::exit);
 
    // Create and set the score box
-    score = new QLabel(this);
-    score->setText(readScore());
+   score = new QLabel(this);
+   list<string> tab;
+   readScore(tab);
+   score->setText(tab);
 
    // Set the button size
    int buttonWidth = width * 0.2;  // 20% of window width
