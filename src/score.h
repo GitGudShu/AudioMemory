@@ -8,8 +8,8 @@
 
 class score {
 public:
-    writeScore(float score);
-    readScore();
+    int writeScore(float score);
+    int readScore();
 };
 
 
