@@ -6,7 +6,9 @@
 #include <string>
 #include <iostream>
 #include <fstream>
+#include <QtWidgets>
 using namespace std;
+QLabel score = new QLabel();
 
 int writeScore(float score){
     ofstream myfile;
