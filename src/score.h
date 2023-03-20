@@ -5,13 +5,14 @@
 #ifndef AUDIOMEMORY_SCORE_H
 #define AUDIOMEMORY_SCORE_H
 #include <string>
+#include <QString>
 #include <iostream>
 #include <fstream>
 
 class score {
-public:
-    int writeScore(float score);
-    void readScore(QString tab);
+    public:
+        int writeScore(float score);
+        void readScore(QString tab);
 };
 
 

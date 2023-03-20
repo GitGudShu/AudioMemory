@@ -1,5 +1,6 @@
 #include <QApplication>
 #include <QtWidgets>
+#include <QString>
 #include "menu.h"
 #include "score.h"
 
