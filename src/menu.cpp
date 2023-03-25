@@ -31,38 +31,56 @@ Menu::Menu(QWidget *parent) :
       backgroundLabel->setGeometry(0, 0, width, height);
    }
    
+   // Styles
+   QString buttonStyle = "font-size: 30px; font-family: Verdana; padding: 10px; border:4px solid #ffd700; border-radius:10px; background-color:#234e98; color:white; font-weight:bold;";
+   QString comboBStyle = "QComboBox { font-size: 30px; padding: 10px; border: 4px solid #ffd700; border-radius: 10px; background-color: #234e98; color: white; font-weight: bold; }"
+                     "QComboBox QAbstractItemView { font-size: 30px; border:4px solid #ffd700; background-color: #234e98; color: white; selection-background-color: #ffd700; }";
+   QString scoreStyle = "font-size: 25px; font-family: Verdana; padding: 2px; border:6px solid #ffd700; border-radius:10px; background-color:#234e98; color:white; font-weight:bold;";
     
    // Buttons
    startButton = new QPushButton(tr("START"), this);
    startButton->setMinimumHeight(40);
-   startButton->setStyleSheet("font-size: 30px; font-family: Arial; padding: 10px; border:4px solid blue; border-radius:10px; background-color:#F2F3F4; color:blue; font-weight:bold;");
+   startButton->setStyleSheet(buttonStyle);
    startButton->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
    connect(startButton, &QPushButton::clicked, this, &Menu::startGame);
 
    exitButton = new QPushButton(tr("EXIT"), this);
    exitButton->setMinimumHeight(40);
-   exitButton->setStyleSheet("font-size: 30px; font-family: Arial; padding: 10px; border:4px solid blue; border-radius:10px; background-color:#F2F3F4; color:blue; font-weight:bold;");
+   exitButton->setStyleSheet(buttonStyle);
    exitButton->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
    connect(exitButton, &QPushButton::clicked, this, &Menu::exit);
 
    // Create and set the score box
    score = new QLabel(this);
-   QString tab = "coucou";
+   QString tab = "Le score sera ici granted Aurélien make it work ;)";
    //score::readScore(tab);
    score->setText(tab);
+   score->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
    // Set the button size
-   int buttonWidth = width * 0.2;  // 20% of window width
-   int buttonHeight = height * 0.1;  // 10% of window height
-   startButton->setFixedSize(buttonWidth, buttonHeight);
-   exitButton->setFixedSize(buttonWidth, buttonHeight);
+  int buttonWidth = width * 0.2;  // 20% of window width
+  int buttonHeight = height * 0.1;  // 10% of window height
+  startButton->setFixedSize(buttonWidth, buttonHeight);
+  exitButton->setFixedSize(buttonWidth, buttonHeight);
 
+  // Create the level selection combo box
+  QComboBox *levelComboBox = new QComboBox(this);
+  levelComboBox->setFixedSize(buttonWidth, buttonHeight);
+  levelComboBox->setStyleSheet(comboBStyle);
+  levelComboBox->addItem("Level 1");
+  levelComboBox->addItem("Level 2");
+  levelComboBox->addItem("Level 3");
 
-   layout = new QGridLayout(this);
-   //layout->addWidget(score, 0, 0, 0, 1, Qt::AlignHCenter | Qt::AlignVCenter);
-   layout->addWidget(startButton, 0, 1, Qt::AlignHCenter | Qt::AlignVCenter);
-   layout->addWidget(exitButton, 1, 1, Qt::AlignHCenter | Qt::AlignVCenter);
-   layout->setContentsMargins(0, 0, 0, 0);
+  layout = new QGridLayout(this);
+  layout->addWidget(score, 1, 0, 2, 1, Qt::AlignHCenter | Qt::AlignVCenter);
+  layout->addWidget(startButton, 1, 1, 1, 1, Qt::AlignHCenter | Qt::AlignVCenter);
+  layout->addWidget(levelComboBox, 2, 1, 1, 1, Qt::AlignHCenter | Qt::AlignVCenter);
+  layout->addWidget(exitButton, 3, 1, 1, 1, Qt::AlignHCenter | Qt::AlignVCenter);
+  layout->setContentsMargins(1, 1, 1, 1);
+
+  layout->setAlignment(Qt::AlignCenter);
+  layout->setHorizontalSpacing(width * 0.25); // 5% of window width
+  layout->setVerticalSpacing(width * 0.025); // 5% of window height
  }
 
  void Menu::startGame()
