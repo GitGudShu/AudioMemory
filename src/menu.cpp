@@ -1,8 +1,12 @@
 #include <QApplication>
 #include <QtWidgets>
 #include <QString>
+#include <QMediaPlayer>
+#include <QMediaMetaData>
 #include "menu.h"
 #include "score.h"
+
+QMediaPlayer *player = new QMediaPlayer();
 
 Menu::Menu(QWidget *parent) :
  QWidget(parent)
@@ -42,12 +46,10 @@ Menu::Menu(QWidget *parent) :
    connect(exitButton, &QPushButton::clicked, this, &Menu::exit);
 
    // Create and set the score box
-   /*
    score = new QLabel(this);
-   QString tab = "";
-   score::readScore(tab);
+   QString tab = "coucou";
+   //score::readScore(tab);
    score->setText(tab);
-  */
 
    // Set the button size
    int buttonWidth = width * 0.2;  // 20% of window width
@@ -57,7 +59,7 @@ Menu::Menu(QWidget *parent) :
 
 
    layout = new QGridLayout(this);
-   layout->addWidget(score, 0, 0, 0, 1, Qt::AlignHCenter | Qt::AlignVCenter);
+   //layout->addWidget(score, 0, 0, 0, 1, Qt::AlignHCenter | Qt::AlignVCenter);
    layout->addWidget(startButton, 0, 1, Qt::AlignHCenter | Qt::AlignVCenter);
    layout->addWidget(exitButton, 1, 1, Qt::AlignHCenter | Qt::AlignVCenter);
    layout->setContentsMargins(0, 0, 0, 0);
@@ -66,9 +68,21 @@ Menu::Menu(QWidget *parent) :
  void Menu::startGame()
  {
    // levels here
-   player = new QMediaPlayer;   
-   player->setMedia(QUrl::fromLocalFile("../assets/audio/artoria.mp3"));
-   player->play();
+  
+  // Load and play the audio file
+  QString audioFilePath = QCoreApplication::applicationDirPath() + "/../assets/audio/artoria.mp3";
+  QUrl audioFileUrl = QUrl::fromLocalFile(audioFilePath);
+  if (QFile::exists(audioFilePath)) {
+      qDebug() << "Audio file found at:" << audioFilePath;
+      player->setMedia(audioFileUrl);
+      player->setVolume(50); // set initial volume
+      player->play();
+      if (player->error() != QMediaPlayer::NoError) {
+          qDebug() << "Error: " << player->errorString();
+      }
+  } else {
+      qDebug() << "Error: audio file not found at:" << audioFilePath;
+  }
  }
 
  void Menu::exit()

@@ -16,11 +16,12 @@ git clone https://github.com/GitGudShu/AudioMemory.git
 
 3. Open a terminal or command prompt and navigate to the project directory.
 
-4. If you don't have the qt mutlimedia module:
+4. If you don't have the qt mutlimedia library:
 
 ```bash
-sudo apt update
-sudo apt-get install qtmultimedia5-dev
+sudo apt update && sudo apt-get upgrade
+sudo apt-get install qtmultimedia5-dev libqt5multimedia5 libqt5multimedia5-plugins libqt5multimediawidgets5 libtag1-dev
+sudo apt-get install gstreamer1.0-tools gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gstreamer1.0-libav
 ```
 
 5. Run the following commands to build the project

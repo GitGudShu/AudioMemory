@@ -1,9 +1,10 @@
 TEMPLATE = app
 TARGET = memoryaudio
 INCLUDEPATH += .
+LIBS += -ltag
 
-QT = core gui widgets multimedia
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+QT = core gui widgets 
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets multimedia
 
 # Input
 HEADERS += menu.h
