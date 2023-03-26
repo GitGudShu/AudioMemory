@@ -16,6 +16,7 @@ class Menu : public QWidget
  private slots:
     void startGame();
     void exit();
+    void setupScreen();
 
  private:
     QPushButton *startButton;

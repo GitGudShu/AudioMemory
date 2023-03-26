@@ -4,7 +4,7 @@
 #include <QMediaPlayer>
 #include <QMediaMetaData>
 #include "menu.h"
-#include "level.h"
+#include "gameboard.h"
 #include "score.h"
 
 QMediaPlayer *player = new QMediaPlayer();
@@ -12,7 +12,43 @@ QMediaPlayer *player = new QMediaPlayer();
 Menu::Menu(QWidget *parent) :
  QWidget(parent)
  {
-   // Window parameters
+  setupScreen();
+
+   
+ }
+
+ void Menu::startGame()
+ {
+  GameBoard* board = new GameBoard(this);
+  board->show();
+  this->hide();
+  
+  // Load and play the audio file
+  QString audioFilePath = QCoreApplication::applicationDirPath() + "/../assets/audio/artoria.mp3";
+  QUrl audioFileUrl = QUrl::fromLocalFile(audioFilePath);
+  if (QFile::exists(audioFilePath)) {
+      qDebug() << "Audio file found at:" << audioFilePath;
+      player->setMedia(audioFileUrl);
+      player->setVolume(50); // set initial volume
+      player->play();
+      if (player->error() != QMediaPlayer::NoError) {
+          qDebug() << "Error: " << player->errorString();
+      }
+  } else {
+      qDebug() << "Error: audio file not found at:" << audioFilePath;
+  }
+
+ }
+
+ void Menu::exit()
+ {
+   // exit the game
+   qApp->quit();
+ }
+
+ void Menu::setupScreen()
+ {
+    // Window parameters
    setWindowTitle("FGO Audio Memory");
    QRect screenGeometry = QApplication::desktop()->screenGeometry();
    int width = screenGeometry.width() * 0.75;  // 75% of screen width
@@ -82,36 +118,4 @@ Menu::Menu(QWidget *parent) :
   layout->setAlignment(Qt::AlignCenter);
   layout->setHorizontalSpacing(width * 0.25); // 5% of window width
   layout->setVerticalSpacing(width * 0.025); // 5% of window height
- }
-
- void Menu::startGame()
- {
-   this->hide();
-   
-  // levels here
-  int numCards = 6; // this will change based on the level chosen
-  Level* level = new Level(this, numCards);
-  level->show();
-  
-  // Load and play the audio file
-  QString audioFilePath = QCoreApplication::applicationDirPath() + "/../assets/audio/artoria.mp3";
-  QUrl audioFileUrl = QUrl::fromLocalFile(audioFilePath);
-  if (QFile::exists(audioFilePath)) {
-      qDebug() << "Audio file found at:" << audioFilePath;
-      player->setMedia(audioFileUrl);
-      player->setVolume(50); // set initial volume
-      player->play();
-      if (player->error() != QMediaPlayer::NoError) {
-          qDebug() << "Error: " << player->errorString();
-      }
-  } else {
-      qDebug() << "Error: audio file not found at:" << audioFilePath;
-  }
-
- }
-
- void Menu::exit()
- {
-   // exit the game
-   qApp->quit();
  }
