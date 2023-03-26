@@ -86,11 +86,12 @@ Menu::Menu(QWidget *parent) :
 
  void Menu::startGame()
  {
+   this->hide();
+   
   // levels here
   int numCards = 6; // this will change based on the level chosen
   Level* level = new Level(this, numCards);
   level->show();
-  this->close();
   
   // Load and play the audio file
   QString audioFilePath = QCoreApplication::applicationDirPath() + "/../assets/audio/artoria.mp3";
@@ -106,6 +107,7 @@ Menu::Menu(QWidget *parent) :
   } else {
       qDebug() << "Error: audio file not found at:" << audioFilePath;
   }
+
  }
 
  void Menu::exit()

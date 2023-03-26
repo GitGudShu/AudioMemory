@@ -7,9 +7,9 @@ QT = core gui widgets
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets multimedia
 
 # Input
-HEADERS += menu.h level.h
+HEADERS += menu.h 
 
-SOURCES += main.cpp menu.cpp level.cpp
+SOURCES += main.cpp menu.cpp
 
 RESOURCES += resources.qrc
 
