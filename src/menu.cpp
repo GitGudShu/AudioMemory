@@ -15,35 +15,6 @@ Menu::Menu(QWidget *parent) :
   setupScreen();
  }
 
- void Menu::startGame()
- {
-  GameBoard* board = new GameBoard(this);
-  board->show();
-  this->hide();
-  
-  // Load and play the audio file
-  QString audioFilePath = QCoreApplication::applicationDirPath() + "/../assets/audio/artoria.mp3";
-  QUrl audioFileUrl = QUrl::fromLocalFile(audioFilePath);
-  if (QFile::exists(audioFilePath)) {
-      qDebug() << "Audio file found at:" << audioFilePath;
-      player->setMedia(audioFileUrl);
-      player->setVolume(50); // set initial volume
-      player->play();
-      if (player->error() != QMediaPlayer::NoError) {
-          qDebug() << "Error: " << player->errorString();
-      }
-  } else {
-      qDebug() << "Error: audio file not found at:" << audioFilePath;
-  }
-
- }
-
- void Menu::exit()
- {
-   // exit the game
-   qApp->quit();
- }
-
  void Menu::setupScreen()
  {
     // Window parameters
@@ -116,4 +87,33 @@ Menu::Menu(QWidget *parent) :
   layout->setAlignment(Qt::AlignCenter);
   layout->setHorizontalSpacing(width * 0.25); // 5% of window width
   layout->setVerticalSpacing(width * 0.025); // 5% of window height
+ }
+
+  void Menu::startGame()
+ {
+  GameBoard* board = new GameBoard(this);
+  board->show();
+  this->hide();
+  
+  // Load and play the audio file
+  QString audioFilePath = QCoreApplication::applicationDirPath() + "/../assets/audio/artoria.mp3";
+  QUrl audioFileUrl = QUrl::fromLocalFile(audioFilePath);
+  if (QFile::exists(audioFilePath)) {
+      qDebug() << "Audio file found at:" << audioFilePath;
+      player->setMedia(audioFileUrl);
+      player->setVolume(50); // set initial volume
+      player->play();
+      if (player->error() != QMediaPlayer::NoError) {
+          qDebug() << "Error: " << player->errorString();
+      }
+  } else {
+      qDebug() << "Error: audio file not found at:" << audioFilePath;
+  }
+
+ }
+
+ void Menu::exit()
+ {
+   // exit the game
+   qApp->quit();
  }

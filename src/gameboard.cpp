@@ -11,11 +11,14 @@
 
 GameBoard::GameBoard(QWidget *parent) : QWidget(parent)
 {
-	QRect screenGeometry = QApplication::desktop()->screenGeometry();
+	 // Window parameters
+   setWindowTitle("FGO Audio Memory");
+   QRect screenGeometry = QApplication::desktop()->screenGeometry();
    int width = screenGeometry.width() * 0.75;  // 75% of screen width
    int height = screenGeometry.height() * 0.75;  // 75% of screen height
+   setFixedSize(width, height);
 
-	// Background image
+   // Background image
    QPixmap bkgnd(":/assets/image/home.jpeg");
    if (bkgnd.isNull()) {
       qDebug() << "Error: failed to load background image";
