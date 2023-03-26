@@ -4,6 +4,7 @@
 #include <QMediaPlayer>
 #include <QMediaMetaData>
 #include "menu.h"
+#include "level.h"
 #include "score.h"
 
 QMediaPlayer *player = new QMediaPlayer();
@@ -87,7 +88,7 @@ Menu::Menu(QWidget *parent) :
  {
   // levels here
   int numCards = 6; // this will change based on the level chosen
-  Level* level = new Level(numCards);
+  Level* level = new Level(this, numCards);
   level->show();
   this->close();
   
