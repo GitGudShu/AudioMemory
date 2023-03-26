@@ -1,4 +1,9 @@
 #include "level.h"
+#include <QApplication>
+#include <QtWidgets>
+#include <QLabel>
+#include <QMediaPlayer>
+#include <QMediaMetaData>
 
 Level::Level(QWidget *parent, int numCards) : QWidget(parent), m_numCards(numCards)
 {
@@ -26,16 +31,4 @@ Level::Level(QWidget *parent, int numCards) : QWidget(parent), m_numCards(numCar
         backgroundLabel->setAlignment(Qt::AlignCenter);
         backgroundLabel->setGeometry(0, 0, width, height);
     }
-
-    // Set up game board
-    for (int row = 0; row < numCards / 4; row++) {
-        for (int col = 0; col < 4; col++) {
-            Card* card = new Card();
-            m_cards.append(card);
-            m_gridLayout->addWidget(card, row, col);
-        }
-    }
-
-    // Connect signals and slots
-    connect(&m_timer, &QTimer::timeout, this, &Level::checkCards);
 }
