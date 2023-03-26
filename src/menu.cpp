@@ -13,8 +13,6 @@ Menu::Menu(QWidget *parent) :
  QWidget(parent)
  {
   setupScreen();
-
-   
  }
 
  void Menu::startGame()
