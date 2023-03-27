@@ -1,11 +1,10 @@
-#include <QApplication>
+
 #include <QtWidgets>
 #include <QString>
 #include <QMediaPlayer>
-#include <QMediaMetaData>
-#include "menu.h"
-#include "gameboard.h"
+
 #include "score.h"
+#include "menu.h"
 
 QMediaPlayer *player = new QMediaPlayer();
 
@@ -38,10 +37,10 @@ Menu::Menu(QWidget *parent) :
    }
    
    // Styles
-   QString buttonStyle = "font-size: 30px; font-family: Verdana; padding: 10px; border:4px solid #ffd700; border-radius:10px; background-color:#234e98; color:white; font-weight:bold;";
-   QString comboBStyle = "QComboBox { font-size: 30px; padding: 10px; border: 4px solid #ffd700; border-radius: 10px; background-color: #234e98; color: white; font-weight: bold; }"
+   buttonStyle = "font-size: 30px; font-family: Verdana; padding: 10px; border:4px solid #ffd700; border-radius:10px; background-color:#234e98; color:white; font-weight:bold;";
+   comboBStyle = "QComboBox { font-size: 30px; padding: 10px; border: 4px solid #ffd700; border-radius: 10px; background-color: #234e98; color: white; font-weight: bold; }"
                      "QComboBox QAbstractItemView { font-size: 30px; border:4px solid #ffd700; background-color: #234e98; color: white; selection-background-color: #ffd700; }";
-   QString scoreStyle = "font-size: 25px; font-family: Verdana; padding: 2px; border:6px solid #ffd700; border-radius:10px; background-color:#234e98; color:white; font-weight:bold;";
+   scoreStyle = "font-size: 25px; font-family: Verdana; padding: 2px; border:6px solid #ffd700; border-radius:10px; background-color:#234e98; color:white; font-weight:bold;";
     
    // Buttons
    startButton = new QPushButton(tr("START"), this);
@@ -91,25 +90,9 @@ Menu::Menu(QWidget *parent) :
 
   void Menu::startGame()
  {
-  GameBoard* board = new GameBoard(this);
-  board->show();
-  this->hide();
-  
-  // Load and play the audio file
-  QString audioFilePath = QCoreApplication::applicationDirPath() + "/../assets/audio/artoria.mp3";
-  QUrl audioFileUrl = QUrl::fromLocalFile(audioFilePath);
-  if (QFile::exists(audioFilePath)) {
-      qDebug() << "Audio file found at:" << audioFilePath;
-      player->setMedia(audioFileUrl);
-      player->setVolume(50); // set initial volume
-      player->play();
-      if (player->error() != QMediaPlayer::NoError) {
-          qDebug() << "Error: " << player->errorString();
-      }
-  } else {
-      qDebug() << "Error: audio file not found at:" << audioFilePath;
-  }
-
+    gameBoard = new GameBoard();
+    gameBoard->show();
+    this->hide();
  }
 
  void Menu::exit()

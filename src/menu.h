@@ -1,10 +1,12 @@
 #ifndef MENU_H
 #define MENU_H
 
+#include <QApplication>
 #include <QWidget>
 #include <QPushButton>
 #include <QGridLayout>
 #include <QLabel>
+#include <gameboard.h>
 
 class Menu : public QWidget
 {
@@ -24,6 +26,13 @@ class Menu : public QWidget
     QLabel *score;
     QGridLayout *layout;
     QLabel *backgroundLabel;
+
+   GameBoard *gameBoard; 
+
+   // Styles
+   QString buttonStyle;
+   QString comboBStyle;
+   QString scoreStyle;
 };
 
 #endif // WINDOW_H
