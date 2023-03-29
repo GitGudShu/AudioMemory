@@ -26,7 +26,7 @@ GameBoard::GameBoard(QWidget *parent) : QWidget(parent)
 
    for (int i = 0; i < 6; i++) {
       QLabel *cardLabel = new QLabel(this);
-      cardLabel->setFixedSize(width * 0.22, height * 0.22);
+      cardLabel->setFixedSize(width * 0.15, height * 0.25);
       QPixmap cardImage(":/assets/image/gold.jpg");
       if (cardImage.isNull()) {
          qDebug() << "Error: failed to load card image";
@@ -41,9 +41,10 @@ GameBoard::GameBoard(QWidget *parent) : QWidget(parent)
       cardLayout->addWidget(cardLabel, row, col, Qt::AlignCenter);
    }
 
-   // Add empty space at the top and bottom of the layout
+   // Add some spaces on the edges
    int verticalSpace = height * 0.1;
-   cardLayout->setContentsMargins(0, verticalSpace, 0, verticalSpace);
+   int horizontalSpace = width * 0.2;
+   cardLayout->setContentsMargins(horizontalSpace, verticalSpace, horizontalSpace, verticalSpace);
 
    // Set the layout for the game board
    setLayout(cardLayout);
