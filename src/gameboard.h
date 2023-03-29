@@ -15,6 +15,9 @@ class GameBoard : public QWidget
 public:
     explicit GameBoard(QWidget *parent = nullptr);
 
+private slots:
+    void setupBackground(int, int);
+
 private:
     QGridLayout* m_gridLayout;
 	QLabel *backgroundLabel;

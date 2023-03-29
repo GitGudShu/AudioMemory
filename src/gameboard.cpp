@@ -11,13 +11,46 @@
 
 GameBoard::GameBoard(QWidget *parent) : QWidget(parent)
 {
-	 // Window parameters
+   // Window parameters
    setWindowTitle("FGO Audio Memory");
    QRect screenGeometry = QApplication::desktop()->screenGeometry();
    int width = screenGeometry.width() * 0.75;  // 75% of screen width
    int height = screenGeometry.height() * 0.75;  // 75% of screen height
    setFixedSize(width, height);
 
+	setupBackground(width, height);
+
+   // Create the layout for the cards
+   QGridLayout *cardLayout = new QGridLayout(this);
+   cardLayout->setSpacing(20); // Add some spacing between the cards
+
+   for (int i = 0; i < 6; i++) {
+      QLabel *cardLabel = new QLabel(this);
+      cardLabel->setFixedSize(width * 0.22, height * 0.22);
+      QPixmap cardImage(":/assets/image/gold.jpg");
+      if (cardImage.isNull()) {
+         qDebug() << "Error: failed to load card image";
+      } else {
+         qDebug() << "Card image loaded successfully";
+      }
+      cardLabel->setPixmap(cardImage);
+      cardLabel->setScaledContents(true);
+
+      int row = i / 3; 
+      int col = i % 3; 
+      cardLayout->addWidget(cardLabel, row, col, Qt::AlignCenter);
+   }
+
+   // Add empty space at the top and bottom of the layout
+   int verticalSpace = height * 0.1;
+   cardLayout->setContentsMargins(0, verticalSpace, 0, verticalSpace);
+
+   // Set the layout for the game board
+   setLayout(cardLayout);
+}
+
+void GameBoard::setupBackground(int width, int height)
+{
    // Background image
    QPixmap bkgnd(":/assets/image/home.jpeg");
    if (bkgnd.isNull()) {
@@ -31,5 +64,3 @@ GameBoard::GameBoard(QWidget *parent) : QWidget(parent)
       backgroundLabel->setGeometry(0, 0, width, height);
    }
 }
-
-
