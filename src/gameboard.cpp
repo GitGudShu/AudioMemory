@@ -9,6 +9,9 @@
 
 GameBoard::GameBoard(QWidget *parent) : QWidget(parent)
 {
+   // Setup audio player
+   player = new QMediaPlayer(this);
+
    // Window parameters
    setWindowTitle("FGO Audio Memory");
    QRect screenGeometry = QApplication::desktop()->screenGeometry();
@@ -22,7 +25,7 @@ GameBoard::GameBoard(QWidget *parent) : QWidget(parent)
    QGridLayout *cardLayout = new QGridLayout(this);
    cardLayout->setSpacing(20); // Add some spacing between the cards
 
-   QString *audioPath = QCoreApplication::applicationDirPath() + "/../assets/audio/";
+   QString audioPath = QCoreApplication::applicationDirPath() + "/../assets/audio/";
 
    QStringList cardAudios = { audioPath + "artoria.mp3",
                               audioPath + "artoria.mp3",
@@ -50,8 +53,9 @@ GameBoard::GameBoard(QWidget *parent) : QWidget(parent)
    }
 
    // Shuffle the cards randomly
-   std::shuffle(cardAudios.begin(), cardAudios.end(), QRandomGenerator::global());
-   std::shuffle(cardButtons.begin(), cardButtons.end(), QRandomGenerator::global());
+   QRandomGenerator generator;
+   std::shuffle(cardAudios.begin(), cardAudios.end(), generator);
+   std::shuffle(cardButtons.begin(), cardButtons.end(), generator);
 
    // Add the shuffled cards to the layout
    for (int i = 0; i < 6; i++) {
@@ -61,11 +65,9 @@ GameBoard::GameBoard(QWidget *parent) : QWidget(parent)
 
       // Connect the card's clicked signal to the slot that checks for matches
       connect(cardButtons[i], &QPushButton::clicked, this, [&, i]() {
-         // Play the audio file associated with the button
-         QMediaPlayer *player = new QMediaPlayer();
-         player->setMedia(QUrl::fromLocalFile(cardAudios[i]));
-         player->play();
-         checkForMatch(cardButtons[i], i);
+         playAudio(cardAudios[i]);
+         // TODO
+         //checkForMatch(cardButtons[i], i);
       });
    }
 
@@ -94,7 +96,7 @@ void GameBoard::setupBackground(int width, int height)
    }
 }
 
-void GameBoard:playAudio(QString audioPath)
+void GameBoard::playAudio(QString audioPath)
 {
     // Load and play the audio file
   QString audioFilePath = audioPath;

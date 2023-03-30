@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QPushButton>
+#include <QMediaPlayer>
 #include <QGridLayout>
 #include <QLabel>
 
@@ -17,11 +18,12 @@ public:
 
 private slots:
     void setupBackground(int, int);
-    void playAudio(QString)
+    void playAudio(QString);
 
 private:
     QGridLayout* m_gridLayout;
 	QLabel *backgroundLabel;
+    QMediaPlayer *player;
 };
 
 #endif // GAMEBOARD_H
