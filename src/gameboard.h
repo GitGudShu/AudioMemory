@@ -17,6 +17,7 @@ public:
 
 private slots:
     void setupBackground(int, int);
+    void playAudio(QString)
 
 private:
     QGridLayout* m_gridLayout;

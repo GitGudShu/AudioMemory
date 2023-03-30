@@ -93,3 +93,21 @@ void GameBoard::setupBackground(int width, int height)
       backgroundLabel->setGeometry(0, 0, width, height);
    }
 }
+
+void GameBoard:playAudio(QString audioPath)
+{
+    // Load and play the audio file
+  QString audioFilePath = audioPath;
+  QUrl audioFileUrl = QUrl::fromLocalFile(audioFilePath);
+  if (QFile::exists(audioFilePath)) {
+      qDebug() << "Audio file found at:" << audioFilePath;
+      player->setMedia(audioFileUrl);
+      player->setVolume(50); // set initial volume
+      player->play();
+      if (player->error() != QMediaPlayer::NoError) {
+          qDebug() << "Error: " << player->errorString();
+      }
+  } else {
+      qDebug() << "Error: audio file not found at:" << audioFilePath;
+  }
+}
