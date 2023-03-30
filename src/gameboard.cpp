@@ -34,6 +34,9 @@ GameBoard::GameBoard(QWidget *parent) : QWidget(parent)
                               audioPath + "jalter.mp3",
                               audioPath + "jalter.mp3"};
 
+   // test audio
+   playAudio(cardAudios[2]);
+
    QList<QPushButton*> cardButtons;
 
    for (int i = 0; i < 6; i++) {
