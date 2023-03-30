@@ -24,10 +24,19 @@ GameBoard::GameBoard(QWidget *parent) : QWidget(parent)
 
    QString *audioPath = QCoreApplication::applicationDirPath() + "/../assets/audio/";
 
+   QStringList cardImages = { audioPath + "artoria.mp3",
+                              audioPath + "artoria.mp3",
+                              audioPath + "voyager.mp3",
+                              audioPath + "voyager.mp3",
+                              audioPath + "jalter.mp3",
+                              audioPath + "jalter.mp3"};
+
+   QList<QLabel*> cardLabels;
+
    for (int i = 0; i < 6; i++) {
       QLabel *cardLabel = new QLabel(this);
       cardLabel->setFixedSize(width * 0.15, height * 0.25);
-      QPixmap cardImage(":/assets/image/gold.jpg");
+      QPixmap cardImage(cardImages[i]);
       if (cardImage.isNull()) {
          qDebug() << "Error: failed to load card image";
       } else {
@@ -36,9 +45,7 @@ GameBoard::GameBoard(QWidget *parent) : QWidget(parent)
       cardLabel->setPixmap(cardImage);
       cardLabel->setScaledContents(true);
 
-      int row = i / 3; 
-      int col = i % 3; 
-      cardLayout->addWidget(cardLabel, row, col, Qt::AlignCenter);
+      cardLabels.append(cardLabel);
    }
 
    // Shuffle the cards randomly
