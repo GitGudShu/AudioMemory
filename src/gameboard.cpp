@@ -4,10 +4,8 @@
 #include <QtWidgets>
 #include <QPushButton>
 #include <QGridLayout>
-#include <QTimer>
-#include <QVariant>
 #include <QRandomGenerator>
-#include <QMessageBox>
+#include <algorithm>
 
 GameBoard::GameBoard(QWidget *parent) : QWidget(parent)
 {
@@ -23,6 +21,8 @@ GameBoard::GameBoard(QWidget *parent) : QWidget(parent)
    // Create the layout for the cards
    QGridLayout *cardLayout = new QGridLayout(this);
    cardLayout->setSpacing(20); // Add some spacing between the cards
+
+   QString *audioPath = QCoreApplication::applicationDirPath() + "/../assets/audio/";
 
    for (int i = 0; i < 6; i++) {
       QLabel *cardLabel = new QLabel(this);
@@ -40,6 +40,9 @@ GameBoard::GameBoard(QWidget *parent) : QWidget(parent)
       int col = i % 3; 
       cardLayout->addWidget(cardLabel, row, col, Qt::AlignCenter);
    }
+
+   // Shuffle the cards randomly
+   std::shuffle(cardLabels.begin(), cardLabels.end(), QRandomGenerator::global());
 
    // Add some spaces on the edges
    int verticalSpace = height * 0.1;
