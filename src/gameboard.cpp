@@ -24,32 +24,50 @@ GameBoard::GameBoard(QWidget *parent) : QWidget(parent)
 
    QString *audioPath = QCoreApplication::applicationDirPath() + "/../assets/audio/";
 
-   QStringList cardImages = { audioPath + "artoria.mp3",
+   QStringList cardAudios = { audioPath + "artoria.mp3",
                               audioPath + "artoria.mp3",
                               audioPath + "voyager.mp3",
                               audioPath + "voyager.mp3",
                               audioPath + "jalter.mp3",
                               audioPath + "jalter.mp3"};
 
-   QList<QLabel*> cardLabels;
+   QList<QPushButton*> cardButtons;
 
    for (int i = 0; i < 6; i++) {
-      QLabel *cardLabel = new QLabel(this);
-      cardLabel->setFixedSize(width * 0.15, height * 0.25);
-      QPixmap cardImage(cardImages[i]);
+      QPushButton *cardButton = new QPushButton(this);
+      cardButton->setFixedSize(width * 0.15, height * 0.25);
+      QPixmap cardImage(":/assets/image/gold.jpg");
       if (cardImage.isNull()) {
          qDebug() << "Error: failed to load card image";
       } else {
          qDebug() << "Card image loaded successfully";
       }
-      cardLabel->setPixmap(cardImage);
-      cardLabel->setScaledContents(true);
+      cardButton->setIcon(QIcon(cardImage));
+      cardButton->setIconSize(cardButton->size());
+      cardButton->setFlat(true);
 
-      cardLabels.append(cardLabel);
+      cardButtons.append(cardButton);
    }
 
    // Shuffle the cards randomly
-   std::shuffle(cardLabels.begin(), cardLabels.end(), QRandomGenerator::global());
+   std::shuffle(cardAudios.begin(), cardAudios.end(), QRandomGenerator::global());
+   std::shuffle(cardButtons.begin(), cardButtons.end(), QRandomGenerator::global());
+
+   // Add the shuffled cards to the layout
+   for (int i = 0; i < 6; i++) {
+      int row = i / 3; 
+      int col = i % 3; 
+      cardLayout->addWidget(cardButtons[i], row, col, Qt::AlignCenter);
+
+      // Connect the card's clicked signal to the slot that checks for matches
+      connect(cardButtons[i], &QPushButton::clicked, this, [&, i]() {
+         // Play the audio file associated with the button
+         QMediaPlayer *player = new QMediaPlayer();
+         player->setMedia(QUrl::fromLocalFile(cardAudios[i]));
+         player->play();
+         checkForMatch(cardButtons[i], i);
+      });
+   }
 
    // Add some spaces on the edges
    int verticalSpace = height * 0.1;
