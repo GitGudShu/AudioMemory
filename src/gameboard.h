@@ -23,6 +23,9 @@ private slots:
         emit buttonClicked(click,audioPath);
     }
     void playAudio(QString);
+    void handleClick(){
+        emit buttonClicked(click, audioPath);
+    }
     void buttonAudio(bool, QString);
 
 private:
@@ -31,6 +34,8 @@ private:
     QString audioPath;
     bool click;
     QMediaPlayer *player;
+    bool click;
+    QString audioPath;
 };
 
 #endif // GAMEBOARD_H
