@@ -13,8 +13,8 @@ GameBoard::GameBoard(QWidget *parent, int difficultyLevel) : QWidget(parent)
    // Setup audio player
    player = new QMediaPlayer(this);
    clickedButton = nullptr;
-   qDebug() << difficultyLevel;
    int cardNumber = 6*difficultyLevel;
+
 
    // Window parameters
    setWindowTitle("FGO Audio Memory");
@@ -52,10 +52,27 @@ GameBoard::GameBoard(QWidget *parent, int difficultyLevel) : QWidget(parent)
 
    QList<QPushButton*> cardButtons;
 
-   for (int i = 0; i < 6; i++) {
+   for (int i = 0; i < cardNumber/2; i++) {
       QPushButton *cardButton = new QPushButton(this);
       cardButton->setFixedSize(width * 0.15, height * 0.25);
       QPixmap cardImage(":/assets/image/gold.jpg");
+      if (cardImage.isNull()) {
+         qDebug() << "Error: failed to load card image";
+      } else {
+         qDebug() << "Card image loaded successfully";
+      }
+      cardButton->setIcon(QIcon(cardImage));
+      cardButton->setIconSize(cardButton->size());
+      cardButton->setFlat(true);
+
+      cardButtons.append(cardButton);
+      
+      // Connect the card's clicked signal to the slot that checks for matches
+      connect(cardButton, &QPushButton::clicked, this, [this, audio = cardAudios[i], buttonSelected = cardButton](){
+         emit buttonClicked(true, audio, buttonSelected);
+      });
+      cardButton = new QPushButton(this);
+      cardButton->setFixedSize(width * 0.15, height * 0.25);
       if (cardImage.isNull()) {
          qDebug() << "Error: failed to load card image";
       } else {
@@ -79,7 +96,7 @@ GameBoard::GameBoard(QWidget *parent, int difficultyLevel) : QWidget(parent)
    connect(this, SIGNAL(buttonClicked(bool, QString, QPushButton*)),this,SLOT(buttonAudio(bool,QString, QPushButton*)));
 
    // Add the shuffled cards to the layout
-   for (int i = 0; i < 6; i++) {
+   for (int i = 0; i < cardNumber; i++) {
       int row = i / 3; 
       int col = i % 3; 
       cardLayout->addWidget(cardButtons[i], row, col, Qt::AlignCenter);
@@ -144,7 +161,8 @@ QList<QPushButton*> winnedButton;
 int count=0;
 
 void GameBoard::checkForWin(QString audioPath, QPushButton *button){
-if(clickedButton == nullptr){
+   button->setEnabled(false);
+   if(clickedButton == nullptr){
       clickedButton = audioPath;
    }
    else{
@@ -154,7 +172,9 @@ if(clickedButton == nullptr){
             winnedButton.append(selectedButton[i]);
             count++;
          }
-         if(count == 6){
+         qDebug() << count;
+         qDebug() << cardNumber;
+         if(count == cardNumber){
             qDebug() << "YOU WIN GG BROOOOO";
             win = true;
             displayWinMessageBox();
@@ -173,7 +193,6 @@ if(clickedButton == nullptr){
 
 void GameBoard::buttonAudio(bool click, QString audioPath, QPushButton *button){
    selectedButton.append(button);
-   button->setEnabled(false);
     if(click){
       playAudio(audioPath);
       checkForWin(audioPath, button);
