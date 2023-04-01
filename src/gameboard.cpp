@@ -83,6 +83,11 @@ GameBoard::GameBoard(QWidget *parent) : QWidget(parent)
       //checkForMatch(cardButtons[i], i););
    }
 
+   // Setup a timer
+   timer = new QTimer(this);
+   connect(timer, &QTimer::timeout, this, &GameBoard::updateTimerBar);
+   timer->start(1000); 
+
    timerBar = new QProgressBar(this);
    timerBar->setRange(0, 100); // Set the range of the progress bar to 0-100
    timerBar->setValue(0); // Set the initial value of the progress bar to 0

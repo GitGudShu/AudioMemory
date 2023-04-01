@@ -7,9 +7,7 @@
 #include <QGridLayout>
 #include <QLabel>
 #include <QProgressBar>
-
-class QGridLayout;
-class QTimer;
+#include <QTimer>
 
 class GameBoard : public QWidget
 {
@@ -23,6 +21,17 @@ private slots:
     void playAudio(QString);
     void buttonAudio(bool, QString, QPushButton*);
     void displayCardAudios(QStringList);
+    void updateTimerBar()
+   {
+      int currentValue = timerBar->value();
+      if (currentValue == 100) {
+         // Time is up!
+         timer->stop();
+         // TODO: Handle the end of the game
+      } else {
+         timerBar->setValue(currentValue + 1);
+      }
+   }
 
 private:
     QGridLayout* m_gridLayout;
@@ -33,6 +42,7 @@ private:
     QPushButton* buttonSelected;
     QString clickedButton;
     QProgressBar *timerBar;
+    QTimer *timer;
 };
 
 #endif // GAMEBOARD_H
