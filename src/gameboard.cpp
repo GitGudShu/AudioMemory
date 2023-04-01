@@ -34,8 +34,7 @@ GameBoard::GameBoard(QWidget *parent) : QWidget(parent)
                               audioPath + "jalter.mp3",
                               audioPath + "jalter.mp3"};
 
-   // test audio
-   playAudio(cardAudios[2]);
+   displayCardAudios(cardAudios);
 
    QList<QPushButton*> cardButtons;
 
@@ -56,9 +55,11 @@ GameBoard::GameBoard(QWidget *parent) : QWidget(parent)
    }
 
    // Shuffle the cards randomly
-   QRandomGenerator generator;
+   QRandomGenerator generator(QTime::currentTime().msec());
    std::shuffle(cardAudios.begin(), cardAudios.end(), generator);
    std::shuffle(cardButtons.begin(), cardButtons.end(), generator);
+
+   displayCardAudios(cardAudios);
 
    // Add the shuffled cards to the layout
    for (int i = 0; i < 6; i++) {
@@ -122,5 +123,12 @@ void GameBoard::playAudio(QString audioPath)
 void GameBoard::buttonAudio(bool click, QString audioPath){
     if(click){
         playAudio(audioPath);
+    }
+}
+
+void GameBoard::displayCardAudios(QStringList cardAudios) {
+    qDebug() << "Card Audios:";
+    for (const auto& audio : cardAudios) {
+        qDebug() << audio;
     }
 }

@@ -24,6 +24,7 @@ private slots:
     }
     void playAudio(QString);
     void buttonAudio(bool, QString);
+    void displayCardAudios(QStringList);
 
 private:
     QGridLayout* m_gridLayout;
