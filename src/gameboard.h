@@ -32,6 +32,7 @@ private:
     QString audioPath;
     bool click;
     QMediaPlayer *player;
+    QString clickedButton;
 };
 
 #endif // GAMEBOARD_H

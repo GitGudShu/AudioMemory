@@ -11,6 +11,7 @@ GameBoard::GameBoard(QWidget *parent) : QWidget(parent)
 {
    // Setup audio player
    player = new QMediaPlayer(this);
+   clickedButton = nullptr;
 
    // Window parameters
    setWindowTitle("FGO Audio Memory");
@@ -36,12 +37,6 @@ GameBoard::GameBoard(QWidget *parent) : QWidget(parent)
 
    displayCardAudios(cardAudios);
 
-   // Shuffle the cards randomly
-   QRandomGenerator generator(QTime::currentTime().msec());
-   std::shuffle(cardAudios.begin(), cardAudios.end(), generator);
-
-   displayCardAudios(cardAudios);
-
    QList<QPushButton*> cardButtons;
 
    for (int i = 0; i < 6; i++) {
@@ -58,23 +53,27 @@ GameBoard::GameBoard(QWidget *parent) : QWidget(parent)
       cardButton->setFlat(true);
 
       cardButtons.append(cardButton);
-
+      
       // Connect the card's clicked signal to the slot that checks for matches
       connect(cardButton, &QPushButton::clicked, this, [this, audio = cardAudios[i]](){
          emit buttonClicked(true, audio);
       });
    }
 
+   // Shuffle the cards randomly
+   QRandomGenerator generator(QTime::currentTime().msec());
+   std::shuffle(cardAudios.begin(), cardAudios.end(), generator);
    std::shuffle(cardButtons.begin(), cardButtons.end(), generator);
 
+   displayCardAudios(cardAudios);
    connect(this, SIGNAL(buttonClicked(bool, QString)),this,SLOT(buttonAudio(bool,QString)));
-
-
    // Add the shuffled cards to the layout
    for (int i = 0; i < 6; i++) {
       int row = i / 3; 
       int col = i % 3; 
       cardLayout->addWidget(cardButtons[i], row, col, Qt::AlignCenter);
+      
+      // Connect the card's clicked signal to the slot that checks for matches
          // TODO
          //checkForMatch(cardButtons[i], i););
    }
@@ -112,7 +111,7 @@ void GameBoard::playAudio(QString audioPath)
   if (QFile::exists(audioFilePath)) {
       qDebug() << "Audio file found at:" << audioFilePath;
       player->setMedia(audioFileUrl);
-      player->setVolume(5); // set initial volume
+      player->setVolume(50); // set initial volume
       player->play();
       if (player->error() != QMediaPlayer::NoError) {
           qDebug() << "Error: " << player->errorString();
@@ -124,7 +123,17 @@ void GameBoard::playAudio(QString audioPath)
 
 void GameBoard::buttonAudio(bool click, QString audioPath){
     if(click){
-        playAudio(audioPath);
+      playAudio(audioPath);
+      qDebug() << clickedButton;
+      if(clickedButton == nullptr){
+         clickedButton = audioPath;
+      }
+      else{
+         if(clickedButton == audioPath){
+            qDebug() << "GG WELL PLAY";
+         }
+         clickedButton = nullptr;
+      }
     }
 }
 
