@@ -37,7 +37,7 @@ class Menu : public QWidget
    QString buttonStyle;
    QString comboBStyle;
    QString scoreStyle;
-   int difficultyLevel;
+   int difficultyLevel = 1;
 };
 
 #endif // WINDOW_H
