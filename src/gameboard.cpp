@@ -31,12 +31,16 @@ GameBoard::GameBoard(QWidget *parent, int difficultyLevel) : QWidget(parent)
 
    QString audioPath = QCoreApplication::applicationDirPath() + "/../assets/audio/";
 
-   QStringList cardAudios = { audioPath + "artoria.mp3",
-                              audioPath + "artoria.mp3",
-                              audioPath + "voyager.mp3",
-                              audioPath + "voyager.mp3",
-                              audioPath + "jalter.mp3",
-                              audioPath + "jalter.mp3"};
+   QStringList audioFiles;
+   QDir audioDir(audioPath); // assuming audioPath is the path to your audio directory
+   audioDir.setFilter(QDir::Files | QDir::NoDotAndDotDot);
+   audioFiles = audioDir.entryList();
+
+   QStringList cardAudios;
+   for (const QString& audioFile : audioFiles) {
+      QString filePath = audioPath + audioFile;
+      cardAudios << filePath << filePath;
+   }
 
    displayCardAudios(cardAudios);
 
