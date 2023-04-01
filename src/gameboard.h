@@ -19,6 +19,7 @@ signals:
     void buttonClicked(bool, QString);
 private slots:
     void setupBackground(int, int);
+    void setupTimer();
     void handleClick(){
         emit buttonClicked(click,audioPath);
     }
@@ -33,6 +34,7 @@ private:
     bool click;
     QMediaPlayer *player;
     QString clickedButton;
+    QProgressBar *timerBar;
 };
 
 #endif // GAMEBOARD_H

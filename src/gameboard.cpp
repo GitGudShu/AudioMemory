@@ -26,6 +26,8 @@ GameBoard::GameBoard(QWidget *parent) : QWidget(parent)
    QGridLayout *cardLayout = new QGridLayout(this);
    cardLayout->setSpacing(20); // Add some spacing between the cards
 
+   setupTimer();
+
    QString audioPath = QCoreApplication::applicationDirPath() + "/../assets/audio/";
 
    QStringList cardAudios = { audioPath + "artoria.mp3",
@@ -34,6 +36,12 @@ GameBoard::GameBoard(QWidget *parent) : QWidget(parent)
                               audioPath + "voyager.mp3",
                               audioPath + "jalter.mp3",
                               audioPath + "jalter.mp3"};
+
+   displayCardAudios(cardAudios);
+
+   // Shuffle the cards randomly
+   QRandomGenerator generator(QTime::currentTime().msec());
+   std::shuffle(cardAudios.begin(), cardAudios.end(), generator);
 
    displayCardAudios(cardAudios);
 
@@ -60,22 +68,20 @@ GameBoard::GameBoard(QWidget *parent) : QWidget(parent)
       });
    }
 
-   // Shuffle the cards randomly
-   QRandomGenerator generator(QTime::currentTime().msec());
-   std::shuffle(cardAudios.begin(), cardAudios.end(), generator);
    std::shuffle(cardButtons.begin(), cardButtons.end(), generator);
 
-   displayCardAudios(cardAudios);
+   // Play the correct audio when clicked
    connect(this, SIGNAL(buttonClicked(bool, QString)),this,SLOT(buttonAudio(bool,QString)));
+
    // Add the shuffled cards to the layout
    for (int i = 0; i < 6; i++) {
       int row = i / 3; 
       int col = i % 3; 
       cardLayout->addWidget(cardButtons[i], row, col, Qt::AlignCenter);
       
+      // TODO
       // Connect the card's clicked signal to the slot that checks for matches
-         // TODO
-         //checkForMatch(cardButtons[i], i););
+      //checkForMatch(cardButtons[i], i););
    }
 
    // Add some spaces on the edges
@@ -142,4 +148,12 @@ void GameBoard::displayCardAudios(QStringList cardAudios) {
     for (const auto& audio : cardAudios) {
         qDebug() << audio;
     }
+}
+
+void GameBoard::setupTimer(){
+   // Create the progress bar
+   timerBar = new QProgressBar(this);
+   timerBar->setRange(0, 100); // Set the range of the progress bar to 0-100
+   timerBar->setValue(0); // Set the initial value of the progress bar to 0
+   cardLayout->addWidget(timerBar, 3, 0, 1, 3); // Add the progress bar to the layout
 }
