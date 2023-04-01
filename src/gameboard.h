@@ -13,7 +13,7 @@ class GameBoard : public QWidget
 {
     Q_OBJECT
 public:
-    explicit GameBoard(QWidget *parent = nullptr);
+    explicit GameBoard(QWidget *parent = nullptr, int difficultyLevel = 1);
 signals:
     void buttonClicked(bool, QString, QPushButton*);
 private slots:
@@ -48,6 +48,7 @@ private:
     QString clickedButton;
     QProgressBar *timerBar;
     QTimer *timer;
+    int cardNumber;
 };
 
 #endif // GAMEBOARD_H

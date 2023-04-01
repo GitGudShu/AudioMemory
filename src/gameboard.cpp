@@ -8,11 +8,13 @@
 #include <algorithm>
 
 
-GameBoard::GameBoard(QWidget *parent) : QWidget(parent)
+GameBoard::GameBoard(QWidget *parent, int difficultyLevel) : QWidget(parent)
 {
    // Setup audio player
    player = new QMediaPlayer(this);
    clickedButton = nullptr;
+   qDebug() << difficultyLevel;
+   int cardNumber = 6*difficultyLevel;
 
    // Window parameters
    setWindowTitle("FGO Audio Memory");
