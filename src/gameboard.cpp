@@ -14,6 +14,9 @@ GameBoard::GameBoard(QWidget *parent, int difficultyLevel) : QWidget(parent)
    player = new QMediaPlayer(this);
    clickedButton = nullptr;
    cardNumber = 6*difficultyLevel;
+   count = 0;
+   selectedButton;
+   winnedButton;
 
 
    // Window parameters
@@ -39,7 +42,7 @@ GameBoard::GameBoard(QWidget *parent, int difficultyLevel) : QWidget(parent)
    QStringList cardAudios;
    for (const QString& audioFile : audioFiles) {
       QString filePath = audioPath + audioFile;
-      cardAudios << filePath << filePath;
+      cardAudios << filePath ;
    }
 
    displayCardAudios(cardAudios);
@@ -155,10 +158,6 @@ void GameBoard::playAudio(QString audioPath)
       qDebug() << "Error: audio file not found at:" << audioFilePath;
   }
 }
-
-QList<QPushButton*> selectedButton;
-QList<QPushButton*> winnedButton;
-int count=0;
 
 void GameBoard::checkForWin(QString audioPath, QPushButton *button){
    button->setEnabled(false);

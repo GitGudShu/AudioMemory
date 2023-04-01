@@ -31,6 +31,7 @@ private slots:
          timer->stop();
          timeScore = QString::number(currentValue);
          qDebug() << timeScore;
+         win = false;
          // TODO: Handle the end of the game
       } else {
          timerBar->setValue(currentValue + 1);
@@ -51,6 +52,9 @@ private:
     QProgressBar *timerBar;
     QTimer *timer;
     int cardNumber;
+    QList<QPushButton*> selectedButton;
+    QList<QPushButton*> winnedButton;
+    int count;
 };
 
 #endif // GAMEBOARD_H
