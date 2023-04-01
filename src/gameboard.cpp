@@ -97,8 +97,8 @@ GameBoard::GameBoard(QWidget *parent, int difficultyLevel) : QWidget(parent)
 
    // Add the shuffled cards to the layout
    for (int i = 0; i < cardNumber; i++) {
-      int row = i / 3; 
-      int col = i % 3; 
+      int row = i % 3; 
+      int col = i / 3; 
       cardLayout->addWidget(cardButtons[i], row, col, Qt::AlignCenter);
    }
 
