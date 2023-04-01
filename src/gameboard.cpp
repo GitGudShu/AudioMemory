@@ -13,7 +13,7 @@ GameBoard::GameBoard(QWidget *parent, int difficultyLevel) : QWidget(parent)
    // Setup audio player
    player = new QMediaPlayer(this);
    clickedButton = nullptr;
-   int cardNumber = 6*difficultyLevel;
+   cardNumber = 6*difficultyLevel;
 
 
    // Window parameters
