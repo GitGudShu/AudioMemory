@@ -68,7 +68,6 @@ GameBoard::GameBoard(QWidget *parent) : QWidget(parent)
       cardLayout->addWidget(cardButtons[i], row, col, Qt::AlignCenter);
 
       // Connect the card's clicked signal to the slot that checks for matches
-      connect(cardButtons[i], SIGNAL(clicked()), this,SLOT(handleClick()));
       connect(cardButtons[i], &QPushButton::clicked, this, [this, audio = cardAudios[i]](){
          emit buttonClicked(true, audio);
       });
