@@ -21,6 +21,7 @@ private slots:
     void playAudio(QString);
     void buttonAudio(bool, QString, QPushButton*);
     void displayCardAudios(QStringList);
+    void testWin(QString, QPushButton*);
     void updateTimerBar()
    {
       int currentValue = timerBar->value();

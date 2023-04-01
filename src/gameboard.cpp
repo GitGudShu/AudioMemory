@@ -141,35 +141,39 @@ QList<QPushButton*> selectedButton;
 QList<QPushButton*> winnedButton;
 int count=0;
 
+void GameBoard::testWin(QString audioPath, QPushButton *button){
+if(clickedButton == nullptr){
+      clickedButton = audioPath;
+   }
+   else{
+      if(clickedButton == audioPath){
+         qDebug() << "GG WELL PLAYED";
+         for(int i=0;i<2;i++){
+            winnedButton.append(selectedButton[i]);
+            count++;
+         }
+         if(count == 6){
+            qDebug() << "YOU WIN GG BROOOOO";
+         }
+      }
+      else{
+         qDebug() << "yorokobe shonen";
+         for(int i=0;i<2;i++){
+            selectedButton[i]->setEnabled(true);
+         }
+         // for button in list : setEnable(true)
+      }
+      clickedButton = nullptr;
+      selectedButton.clear();
+   }
+}
+
 void GameBoard::buttonAudio(bool click, QString audioPath, QPushButton *button){
    selectedButton.append(button);
    button->setEnabled(false);
     if(click){
       playAudio(audioPath);
-      if(clickedButton == nullptr){
-         clickedButton = audioPath;
-      }
-      else{
-         if(clickedButton == audioPath){
-            qDebug() << "GG WELL PLAYED";
-            for(int i=0;i<2;i++){
-               winnedButton.append(selectedButton[i]);
-               count++;
-            }
-            if(count == 6){
-               qDebug() << "YOU WIN GG BROOOOO";
-            }
-         }
-         else{
-            qDebug() << "yorokobe shonen";
-            for(int i=0;i<2;i++){
-               selectedButton[i]->setEnabled(true);
-            }
-            // for button in list : setEnable(true)
-         }
-         clickedButton = nullptr;
-         selectedButton.clear();
-      }
+      testWin(audioPath, button);
     }
 }
 
