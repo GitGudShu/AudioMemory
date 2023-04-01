@@ -23,7 +23,7 @@ private slots:
         emit buttonClicked(click,audioPath);
     }
     void playAudio(QString);
-    void handleButton(bool, QString);
+    void buttonAudio(bool, QString);
 
 private:
     QGridLayout* m_gridLayout;
