@@ -70,7 +70,7 @@ GameBoard::GameBoard(QWidget *parent) : QWidget(parent)
    std::shuffle(cardButtons.begin(), cardButtons.end(), generator);
 
    // Play the correct audio when clicked
-   connect(this, SIGNAL(buttonClicked(bool, QString)),this,SLOT(buttonAudio(bool,QString)));
+   connect(this, SIGNAL(buttonClicked(bool, QString, QPushButton*)),this,SLOT(buttonAudio(bool,QString, QPushButton*)));
 
    // Add the shuffled cards to the layout
    for (int i = 0; i < 6; i++) {

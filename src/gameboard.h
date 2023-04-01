@@ -20,7 +20,6 @@ signals:
     void buttonClicked(bool, QString, QPushButton*);
 private slots:
     void setupBackground(int, int);
-    void setupTimer();
     void playAudio(QString);
     void buttonAudio(bool, QString, QPushButton*);
     void displayCardAudios(QStringList);
