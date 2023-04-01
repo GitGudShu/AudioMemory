@@ -77,10 +77,6 @@ GameBoard::GameBoard(QWidget *parent) : QWidget(parent)
       int row = i / 3; 
       int col = i % 3; 
       cardLayout->addWidget(cardButtons[i], row, col, Qt::AlignCenter);
-      
-      // TODO
-      // Connect the card's clicked signal to the slot that checks for matches
-      //checkForMatch(cardButtons[i], i););
    }
 
    // Setup a timer
@@ -141,7 +137,7 @@ QList<QPushButton*> selectedButton;
 QList<QPushButton*> winnedButton;
 int count=0;
 
-void GameBoard::testWin(QString audioPath, QPushButton *button){
+void GameBoard::checkForWin(QString audioPath, QPushButton *button){
 if(clickedButton == nullptr){
       clickedButton = audioPath;
    }
