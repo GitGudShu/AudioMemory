@@ -68,7 +68,10 @@ GameBoard::GameBoard(QWidget *parent) : QWidget(parent)
 
       // Connect the card's clicked signal to the slot that checks for matches
       connect(cardButtons[i], SIGNAL(clicked()), this,SLOT(handleClick()));
-      connect(this, SIGNAL(buttonClicked(bool, QString)), this, SLOT(buttonAudio(bool, QString)));
+      connect(cardButtons[i], &QPushButton::clicked, this, [this, audio = cardAudios[i]](){
+         emit buttonClicked(true, audio);
+      });
+
          // TODO
          //checkForMatch(cardButtons[i], i););
    }
@@ -80,12 +83,6 @@ GameBoard::GameBoard(QWidget *parent) : QWidget(parent)
 
    // Set the layout for the game board
    setLayout(cardLayout);
-}
-
-void GameBoard::buttonAudio(bool click, QString audioPath){
-    if(click){
-        playAudio(audioPath);
-    }
 }
 
 void GameBoard::setupBackground(int width, int height)
@@ -120,4 +117,10 @@ void GameBoard::playAudio(QString audioPath)
   } else {
       qDebug() << "Error: audio file not found at:" << audioFilePath;
   }
+}
+
+void GameBoard::buttonAudio(bool click, QString audioPath){
+    if(click){
+        playAudio(audioPath);
+    }
 }
