@@ -1,11 +1,12 @@
 #include "gameboard.h"
-
+#include <array>
 #include <QApplication>
 #include <QtWidgets>
 #include <QPushButton>
 #include <QGridLayout>
 #include <QRandomGenerator>
 #include <algorithm>
+
 
 GameBoard::GameBoard(QWidget *parent) : QWidget(parent)
 {
@@ -61,8 +62,8 @@ GameBoard::GameBoard(QWidget *parent) : QWidget(parent)
       cardButtons.append(cardButton);
       
       // Connect the card's clicked signal to the slot that checks for matches
-      connect(cardButton, &QPushButton::clicked, this, [this, audio = cardAudios[i]](){
-         emit buttonClicked(true, audio);
+      connect(cardButton, &QPushButton::clicked, this, [this, audio = cardAudios[i], buttonSelected = cardButton](){
+         emit buttonClicked(true, audio, buttonSelected);
       });
    }
 
@@ -131,16 +132,33 @@ void GameBoard::playAudio(QString audioPath)
   }
 }
 
-void GameBoard::buttonAudio(bool click, QString audioPath){
+QList<QPushButton*> selectedButton;
+QList<QPushButton*> winnedButton;
+
+void GameBoard::buttonAudio(bool click, QString audioPath, QPushButton *button){
+   selectedButton.append(button);
+   button->setEnabled(false);
     if(click){
       playAudio(audioPath);
-      qDebug() << clickedButton;
       if(clickedButton == nullptr){
          clickedButton = audioPath;
       }
       else{
          if(clickedButton == audioPath){
-            qDebug() << "GG WELL PLAY";
+            qDebug() << "GG WELL PLAYED";
+            for(int i=0;i<2;i++){
+               winnedButton.append(selectedButton[i]);
+            }
+            if(sizeof(winnedButton)/sizeof(winnedButton[0]) == 6){
+               qDebug() << "YOU WIN GG BROOOOO";
+            }
+         }
+         else{
+            qDebug() << "yorokobe shonen";
+            for(int i=0;i<2;i++){
+               selectedButton[i]->setEnabled(true);
+            }
+            // for button in list : setEnable(true)
          }
          clickedButton = nullptr;
       }

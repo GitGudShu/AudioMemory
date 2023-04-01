@@ -17,14 +17,12 @@ class GameBoard : public QWidget
 public:
     explicit GameBoard(QWidget *parent = nullptr);
 signals:
-    void buttonClicked(bool, QString);
+    void buttonClicked(bool, QString, QPushButton*);
 private slots:
     void setupBackground(int, int);
-    void handleClick(){
-        emit buttonClicked(click,audioPath);
-    }
+    void setupTimer();
     void playAudio(QString);
-    void buttonAudio(bool, QString);
+    void buttonAudio(bool, QString, QPushButton*);
     void displayCardAudios(QStringList);
 
 private:
@@ -33,6 +31,7 @@ private:
     QString audioPath;
     bool click;
     QMediaPlayer *player;
+    QPushButton* buttonSelected;
     QString clickedButton;
     QProgressBar *timerBar;
 };
