@@ -35,6 +35,10 @@ private slots:
          timerBar->setValue(currentValue + 1);
       }
    }
+   void displayWinMessageBox();
+   //void retryGame();
+public slots:
+    //void backToMenu();
 
 private:
     QGridLayout* m_gridLayout;

@@ -181,3 +181,17 @@ void GameBoard::displayCardAudios(QStringList cardAudios) {
         qDebug() << audio;
     }
 }
+
+void GameBoard::displayWinMessageBox(){
+   // create a message box with a "Return to Menu" button
+   QMessageBox messageBox;
+    messageBox.setText("Congratulations! You have won the game!");
+    messageBox.setStandardButtons(QMessageBox::Retry | QMessageBox::Close);
+    messageBox.setDefaultButton(QMessageBox::Retry);
+    int ret = messageBox.exec();
+    if (ret == QMessageBox::Retry) {
+        //emit retryGame();
+    } else {
+        //emit backToMenu();
+    }
+}
