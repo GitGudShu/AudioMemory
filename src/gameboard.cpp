@@ -153,6 +153,7 @@ if(clickedButton == nullptr){
          if(count == 6){
             qDebug() << "YOU WIN GG BROOOOO";
             win = true;
+            displayWinMessageBox();
          }
       }
       else{
