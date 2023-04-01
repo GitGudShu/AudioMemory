@@ -134,6 +134,7 @@ void GameBoard::playAudio(QString audioPath)
 
 QList<QPushButton*> selectedButton;
 QList<QPushButton*> winnedButton;
+int count=0;
 
 void GameBoard::buttonAudio(bool click, QString audioPath, QPushButton *button){
    selectedButton.append(button);
@@ -148,8 +149,9 @@ void GameBoard::buttonAudio(bool click, QString audioPath, QPushButton *button){
             qDebug() << "GG WELL PLAYED";
             for(int i=0;i<2;i++){
                winnedButton.append(selectedButton[i]);
+               count++;
             }
-            if(sizeof(winnedButton)/sizeof(winnedButton[0]) == 6){
+            if(count == 6){
                qDebug() << "YOU WIN GG BROOOOO";
             }
          }
@@ -161,6 +163,7 @@ void GameBoard::buttonAudio(bool click, QString audioPath, QPushButton *button){
             // for button in list : setEnable(true)
          }
          clickedButton = nullptr;
+         selectedButton.clear();
       }
     }
 }
