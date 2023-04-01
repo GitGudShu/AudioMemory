@@ -76,7 +76,8 @@ Menu::Menu(QWidget *parent) :
   levelComboBox->addItem("Level 1");
   levelComboBox->addItem("Level 2");
   levelComboBox->addItem("Level 3");
-
+  connect(levelComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Menu::changeDifficulty);
+  
   layout = new QGridLayout(this);
   layout->addWidget(scores, 1, 0, 2, 1, Qt::AlignHCenter | Qt::AlignVCenter);
   layout->addWidget(startButton, 1, 1, 1, 1, Qt::AlignHCenter | Qt::AlignVCenter);
@@ -89,9 +90,13 @@ Menu::Menu(QWidget *parent) :
   layout->setVerticalSpacing(width * 0.025); // 5% of window height
  }
 
+ void Menu::changeDifficulty(int selected){
+   difficultyLevel = selected+1;
+ }
+
   void Menu::startGame()
  {
-    gameBoard = new GameBoard();
+    gameBoard = new GameBoard(nullptr,difficultyLevel);
     gameBoard->show();
     this->hide();
  }

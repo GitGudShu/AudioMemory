@@ -20,6 +20,7 @@ class Menu : public QWidget
     void startGame();
     void exit();
     void setupScreen();
+    void changeDifficulty(int);
 
  private:
     QPushButton *startButton;
@@ -35,6 +36,7 @@ class Menu : public QWidget
    QString buttonStyle;
    QString comboBStyle;
    QString scoreStyle;
+   int difficultyLevel;
 };
 
 #endif // WINDOW_H
