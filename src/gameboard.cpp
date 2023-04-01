@@ -216,6 +216,6 @@ void GameBoard::displayWinMessageBox(){
     if (ret == QMessageBox::Retry) {
         //emit retryGame();
     } else {
-        //emit backToMenu();
+        emit backToMenu();
     }
 }

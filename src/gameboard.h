@@ -16,6 +16,7 @@ public:
     explicit GameBoard(QWidget *parent = nullptr, int difficultyLevel = 1);
 signals:
     void buttonClicked(bool, QString, QPushButton*);
+    void backToMenu();
 private slots:
     void setupBackground(int, int);
     void playAudio(QString);
@@ -36,9 +37,6 @@ private slots:
       }
    }
    void displayWinMessageBox();
-   //void retryGame();
-public slots:
-    //void backToMenu();
 
 private:
     QGridLayout* m_gridLayout;
