@@ -26,8 +26,6 @@ GameBoard::GameBoard(QWidget *parent) : QWidget(parent)
    QGridLayout *cardLayout = new QGridLayout(this);
    cardLayout->setSpacing(20); // Add some spacing between the cards
 
-   setupTimer();
-
    QString audioPath = QCoreApplication::applicationDirPath() + "/../assets/audio/";
 
    QStringList cardAudios = { audioPath + "artoria.mp3",
@@ -84,9 +82,15 @@ GameBoard::GameBoard(QWidget *parent) : QWidget(parent)
       //checkForMatch(cardButtons[i], i););
    }
 
+   timerBar = new QProgressBar(this);
+   timerBar->setRange(0, 100); // Set the range of the progress bar to 0-100
+   timerBar->setValue(0); // Set the initial value of the progress bar to 0
+   cardLayout->addWidget(timerBar, 3, 0, 1, 3); // Add the progress bar to the layout
+
    // Add some spaces on the edges
    int verticalSpace = height * 0.1;
    int horizontalSpace = width * 0.2;
+   
    cardLayout->setContentsMargins(horizontalSpace, verticalSpace, horizontalSpace, verticalSpace);
 
    // Set the layout for the game board
@@ -117,7 +121,7 @@ void GameBoard::playAudio(QString audioPath)
   if (QFile::exists(audioFilePath)) {
       qDebug() << "Audio file found at:" << audioFilePath;
       player->setMedia(audioFileUrl);
-      player->setVolume(50); // set initial volume
+      player->setVolume(5); // set initial volume
       player->play();
       if (player->error() != QMediaPlayer::NoError) {
           qDebug() << "Error: " << player->errorString();
@@ -148,12 +152,4 @@ void GameBoard::displayCardAudios(QStringList cardAudios) {
     for (const auto& audio : cardAudios) {
         qDebug() << audio;
     }
-}
-
-void GameBoard::setupTimer(){
-   // Create the progress bar
-   timerBar = new QProgressBar(this);
-   timerBar->setRange(0, 100); // Set the range of the progress bar to 0-100
-   timerBar->setValue(0); // Set the initial value of the progress bar to 0
-   cardLayout->addWidget(timerBar, 3, 0, 1, 3); // Add the progress bar to the layout
 }

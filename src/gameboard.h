@@ -6,6 +6,7 @@
 #include <QMediaPlayer>
 #include <QGridLayout>
 #include <QLabel>
+#include <QProgressBar>
 
 class QGridLayout;
 class QTimer;
@@ -19,7 +20,6 @@ signals:
     void buttonClicked(bool, QString);
 private slots:
     void setupBackground(int, int);
-    void setupTimer();
     void handleClick(){
         emit buttonClicked(click,audioPath);
     }
