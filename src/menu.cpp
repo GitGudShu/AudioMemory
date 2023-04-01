@@ -56,11 +56,12 @@ Menu::Menu(QWidget *parent) :
    connect(exitButton, &QPushButton::clicked, this, &Menu::exit);
 
    // Create and set the score box
-   score = new QLabel(this);
+   scores = new QLabel(this);
    QString tab = "Le score sera ici granted Aurélien make it work ;)";
-   //score::readScore(tab);
-   score->setText(tab);
-   score->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+   score = new Score();
+   //score->readScore(tab);
+   scores->setText(tab);
+   scores->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
    // Set the button size
   int buttonWidth = width * 0.2;  // 20% of window width
@@ -77,7 +78,7 @@ Menu::Menu(QWidget *parent) :
   levelComboBox->addItem("Level 3");
 
   layout = new QGridLayout(this);
-  layout->addWidget(score, 1, 0, 2, 1, Qt::AlignHCenter | Qt::AlignVCenter);
+  layout->addWidget(scores, 1, 0, 2, 1, Qt::AlignHCenter | Qt::AlignVCenter);
   layout->addWidget(startButton, 1, 1, 1, 1, Qt::AlignHCenter | Qt::AlignVCenter);
   layout->addWidget(levelComboBox, 2, 1, 1, 1, Qt::AlignHCenter | Qt::AlignVCenter);
   layout->addWidget(exitButton, 3, 1, 1, 1, Qt::AlignHCenter | Qt::AlignVCenter);

@@ -9,7 +9,7 @@
 #include <iostream>
 #include <fstream>
 
-class score {
+class Score {
     public:
         int writeScore(float score);
         void readScore(QString tab);

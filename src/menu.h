@@ -7,6 +7,7 @@
 #include <QGridLayout>
 #include <QLabel>
 #include <gameboard.h>
+#include <score.h>
 
 class Menu : public QWidget
 {
@@ -23,11 +24,12 @@ class Menu : public QWidget
  private:
     QPushButton *startButton;
     QPushButton *exitButton;
-    QLabel *score;
+    QLabel *scores;
     QGridLayout *layout;
     QLabel *backgroundLabel;
 
    GameBoard *gameBoard; 
+   Score *score;
 
    // Styles
    QString buttonStyle;
