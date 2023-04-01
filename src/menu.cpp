@@ -99,6 +99,7 @@ Menu::Menu(QWidget *parent) :
     gameBoard = new GameBoard(nullptr,difficultyLevel);
     gameBoard->show();
     this->hide();
+    connect(gameBoard, &GameBoard::backToMenu, this, &Menu::showMenu);
  }
 
  void Menu::exit()
@@ -106,3 +107,9 @@ Menu::Menu(QWidget *parent) :
    // exit the game
    qApp->quit();
  }
+
+ void Menu::showMenu()
+{
+    this->show();
+    gameBoard->hide();
+}
