@@ -28,6 +28,8 @@ private slots:
       if (currentValue == 100 || win) {
          // Time is up!
          timer->stop();
+         timeScore = QString::number(currentValue);
+         qDebug() << timeScore;
          // TODO: Handle the end of the game
       } else {
          timerBar->setValue(currentValue + 1);
@@ -40,6 +42,7 @@ private:
     QString audioPath;
     bool click;
     bool win;
+    QString timeScore;
     QMediaPlayer *player;
     QPushButton* buttonSelected;
     QString clickedButton;
