@@ -21,11 +21,11 @@ private slots:
     void playAudio(QString);
     void buttonAudio(bool, QString, QPushButton*);
     void displayCardAudios(QStringList);
-    void testWin(QString, QPushButton*);
+    void checkForWin(QString, QPushButton*);
     void updateTimerBar()
    {
       int currentValue = timerBar->value();
-      if (currentValue == 100) {
+      if (currentValue == 100 || win) {
          // Time is up!
          timer->stop();
          // TODO: Handle the end of the game
@@ -39,6 +39,7 @@ private:
 	QLabel *backgroundLabel;
     QString audioPath;
     bool click;
+    bool win;
     QMediaPlayer *player;
     QPushButton* buttonSelected;
     QString clickedButton;

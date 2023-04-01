@@ -150,6 +150,7 @@ if(clickedButton == nullptr){
          }
          if(count == 6){
             qDebug() << "YOU WIN GG BROOOOO";
+            win = true;
          }
       }
       else{
@@ -157,7 +158,6 @@ if(clickedButton == nullptr){
          for(int i=0;i<2;i++){
             selectedButton[i]->setEnabled(true);
          }
-         // for button in list : setEnable(true)
       }
       clickedButton = nullptr;
       selectedButton.clear();
@@ -169,7 +169,7 @@ void GameBoard::buttonAudio(bool click, QString audioPath, QPushButton *button){
    button->setEnabled(false);
     if(click){
       playAudio(audioPath);
-      testWin(audioPath, button);
+      checkForWin(audioPath, button);
     }
 }
 
