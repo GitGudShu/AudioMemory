@@ -71,7 +71,7 @@ GameBoard::GameBoard(QWidget *parent) : QWidget(parent)
       connect(cardButtons[i], &QPushButton::clicked, this, [this, audio = cardAudios[i]](){
          emit buttonClicked(true, audio);
       });
-
+      connect(this, SIGNAL(buttonClicked(bool, QString)),this,SLOT(buttonAudio(bool,QString)));
          // TODO
          //checkForMatch(cardButtons[i], i););
    }
