@@ -15,15 +15,22 @@ class GameBoard : public QWidget
     Q_OBJECT
 public:
     explicit GameBoard(QWidget *parent = nullptr);
-
+signals:
+    void buttonClicked(bool, QString);
 private slots:
     void setupBackground(int, int);
     void playAudio(QString);
+    void handleClick(){
+        emit buttonClicked(click, audioPath);
+    }
+    void buttonAudio(bool, QString);
 
 private:
     QGridLayout* m_gridLayout;
 	QLabel *backgroundLabel;
     QMediaPlayer *player;
+    bool click;
+    QString audioPath;
 };
 
 #endif // GAMEBOARD_H

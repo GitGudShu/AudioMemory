@@ -67,11 +67,10 @@ GameBoard::GameBoard(QWidget *parent) : QWidget(parent)
       cardLayout->addWidget(cardButtons[i], row, col, Qt::AlignCenter);
 
       // Connect the card's clicked signal to the slot that checks for matches
-      connect(cardButtons[i], &QPushButton::clicked, this, [&, i]() {
-         playAudio(cardAudios[i]);
+      connect(cardButtons[i], SIGNAL(clicked()), this,SLOT(handleClick()));
+      connect(this, SIGNAL(buttonClicked(bool, QString)), this, SLOT(buttonAudio(bool, QString)));
          // TODO
-         //checkForMatch(cardButtons[i], i);
-      });
+         //checkForMatch(cardButtons[i], i););
    }
 
    // Add some spaces on the edges
@@ -81,6 +80,12 @@ GameBoard::GameBoard(QWidget *parent) : QWidget(parent)
 
    // Set the layout for the game board
    setLayout(cardLayout);
+}
+
+void GameBoard::buttonAudio(bool click, QString audioPath){
+    if(click){
+        playAudio(audioPath);
+    }
 }
 
 void GameBoard::setupBackground(int width, int height)
