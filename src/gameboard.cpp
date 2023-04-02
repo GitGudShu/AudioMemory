@@ -30,7 +30,20 @@ GameBoard::GameBoard(QWidget *parent, int difficultyLevel) : QWidget(parent)
 
    // Create the layout for the cards
    QGridLayout *cardLayout = new QGridLayout(this);
-   cardLayout->setSpacing(20); // Add some spacing between the cards
+
+   // Add some spacing between the cards
+   if (difficultyLevel == 1){
+      cardLayout->setSpacing(20); 
+      qDebug() << "Spacing 1";
+   }else if (difficultyLevel == 2){
+      cardLayout->setSpacing(5);
+      cardLayout->setVerticalSpacing(5);
+      qDebug() << "Spacing 2";
+   }else{ 
+      cardLayout->setSpacing(5);
+      cardLayout->setVerticalSpacing(10);
+      qDebug() << "Spacing 3";
+   }
 
    QString audioPath = QCoreApplication::applicationDirPath() + "/../assets/audio/";
 
@@ -56,41 +69,37 @@ GameBoard::GameBoard(QWidget *parent, int difficultyLevel) : QWidget(parent)
    QList<QPushButton*> cardButtons;
 
    for (int i = 0; i < cardNumber/2; i++) {
-      QPushButton *cardButton = new QPushButton(this);
-      cardButton->setFixedSize(width * 0.15, height * 0.25);
-      QPixmap cardImage(":/assets/image/gold.jpg");
-      if (cardImage.isNull()) {
-         qDebug() << "Error: failed to load card image";
-      } else {
-         qDebug() << "Card image loaded successfully";
-      }
-      cardButton->setIcon(QIcon(cardImage));
-      cardButton->setIconSize(cardButton->size());
-      cardButton->setFlat(true);
+      for (int j = 0; j < 2; j++) {
+         QPushButton *cardButton = new QPushButton(this);
 
-      cardButtons.append(cardButton);
-      
-      // Connect the card's clicked signal to the slot that checks for matches
-      connect(cardButton, &QPushButton::clicked, this, [this, audio = cardAudios[i], buttonSelected = cardButton](){
-         emit buttonClicked(true, audio, buttonSelected);
-      });
-      cardButton = new QPushButton(this);
-      cardButton->setFixedSize(width * 0.15, height * 0.25);
-      if (cardImage.isNull()) {
-         qDebug() << "Error: failed to load card image";
-      } else {
-         qDebug() << "Card image loaded successfully";
-      }
-      cardButton->setIcon(QIcon(cardImage));
-      cardButton->setIconSize(cardButton->size());
-      cardButton->setFlat(true);
+         if (difficultyLevel == 1){
+            cardButton->setFixedSize(width * 0.15, height * 0.25);
+            qDebug() << "size 1";
+         }else if (difficultyLevel == 2){
+            cardButton->setFixedSize(width * 0.1, height * 0.2);
+            qDebug() << "size 2";
+         }else{ 
+            cardButton->setFixedSize(width * 0.1, height * 0.15);
+            qDebug() << "size 3";
+         }
 
-      cardButtons.append(cardButton);
-      
-      // Connect the card's clicked signal to the slot that checks for matches
-      connect(cardButton, &QPushButton::clicked, this, [this, audio = cardAudios[i], buttonSelected = cardButton](){
-         emit buttonClicked(true, audio, buttonSelected);
-      });
+         QPixmap cardImage(":/assets/image/gold.jpg");
+         if (cardImage.isNull()) 
+            qDebug() << "Error: failed to load card image";
+         else 
+            qDebug() << "Card image loaded successfully";
+
+         cardButton->setIcon(QIcon(cardImage));
+         cardButton->setIconSize(cardButton->size());
+         cardButton->setFlat(true);
+
+         cardButtons.append(cardButton);
+         
+         // Connect the card's clicked signal to the slot that checks for matches
+         connect(cardButton, &QPushButton::clicked, this, [this, audio = cardAudios[i], buttonSelected = cardButton](){
+            emit buttonClicked(true, audio, buttonSelected);
+         });
+      }
    }
 
    std::shuffle(cardButtons.begin(), cardButtons.end(), generator);
@@ -99,10 +108,24 @@ GameBoard::GameBoard(QWidget *parent, int difficultyLevel) : QWidget(parent)
    connect(this, SIGNAL(buttonClicked(bool, QString, QPushButton*)),this,SLOT(buttonAudio(bool,QString, QPushButton*)));
 
    // Add the shuffled cards to the layout
-   for (int i = 0; i < cardNumber; i++) {
-      int row = i % 3; 
-      int col = i / 3; 
-      cardLayout->addWidget(cardButtons[i], row, col, Qt::AlignCenter);
+   if (difficultyLevel == 1) {
+      for (int i = 0; i < cardNumber; i++) {
+         int row = i / 3;
+         int col = i % 3;
+         cardLayout->addWidget(cardButtons[i], row, col, Qt::AlignCenter);
+      }
+   } else if (difficultyLevel == 2) {
+      for (int i = 0; i < cardNumber; i++) {
+         int row = i / 6;
+         int col = i % 6;
+         cardLayout->addWidget(cardButtons[i], row, col, Qt::AlignCenter);
+      }
+   } else {
+      for (int i = 0; i < cardNumber; i++) {
+         int row = i / 6;
+         int col = i % 6;
+         cardLayout->addWidget(cardButtons[i], row, col, Qt::AlignCenter);
+      }
    }
 
    // Setup a timer
