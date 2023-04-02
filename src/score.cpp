@@ -12,6 +12,7 @@ void Score::writeScore(QString difficulty, QString score) {
 
     time_t now = time(0);
     char* dt = ctime(&now);
+    dt[strlen(dt) - 1] = '\0'; 
     ofstream myfile;
     myfile.open("score.txt", ios::app);
     if (!myfile) { // Check if score.txt exists
@@ -19,9 +20,10 @@ void Score::writeScore(QString difficulty, QString score) {
         myfile.close(); 
         myfile.open("score.txt", ios::app); 
     }
-    myfile << dt << "Difficulty: " << diff << ", Score: " << scr << endl;
+    myfile << dt << ", Difficulty: " << diff << ", Score: " << scr << endl;
     myfile.close();
 }
+
 
 QString Score::readScore() { 
     vector<pair<double, string>> scores; // couples are easier to deal with trust me
