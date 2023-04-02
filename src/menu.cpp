@@ -98,6 +98,7 @@ Menu::Menu(QWidget *parent) :
     gameBoard->show();
     this->hide();
     connect(gameBoard, &GameBoard::backToMenu, this, &Menu::showMenu);
+    connect(gameBoard, &GameBoard::retryGame, this, &Menu::retryGame);
  }
 
  void Menu::exit()
@@ -106,9 +107,15 @@ Menu::Menu(QWidget *parent) :
    qApp->quit();
  }
 
- void Menu::showMenu()
+void Menu::showMenu()
 {
     this->show();
     scores->setText(score->readScore());
     gameBoard->hide();
+}
+
+void Menu::retryGame()
+{
+   gameBoard->hide();
+   startGame();
 }

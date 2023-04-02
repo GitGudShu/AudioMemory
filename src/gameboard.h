@@ -18,6 +18,7 @@ public:
 signals:
     void buttonClicked(bool, QString, QPushButton*);
     void backToMenu();
+    void retryGame();
     void winScore(QString, QString);
 private slots:
     void setupBackground(int, int);

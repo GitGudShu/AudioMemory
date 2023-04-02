@@ -256,7 +256,7 @@ void GameBoard::displayWinMessageBox(){
     messageBox.setDefaultButton(QMessageBox::Retry);
     int ret = messageBox.exec();
     if (ret == QMessageBox::Retry) {
-        //emit retryGame();
+        emit retryGame();
     } else {
         emit backToMenu();
     }

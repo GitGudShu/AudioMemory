@@ -22,6 +22,7 @@ class Menu : public QWidget
     void setupScreen();
     void changeDifficulty(int);
     void showMenu();
+    void retryGame();
 
  private:
     QPushButton *startButton;
