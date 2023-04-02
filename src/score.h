@@ -5,7 +5,7 @@
 
 class Score {
 public:
-    static int writeScore(float score);
+    static void writeScore(QString difficulty, QString score);
     static QString readScore();
 };
 

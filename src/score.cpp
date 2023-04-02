@@ -2,13 +2,19 @@
 #include <QString>
 #include <iostream>
 #include <fstream>
+#include <ctime>
 using namespace std;
 
-int Score::writeScore(float score) {
-    ofstream myfile("score.txt"); 
-    myfile << to_string(score) << "\n"; 
-    myfile.close(); 
-    return 0;
+void Score::writeScore(QString difficulty, QString score) {
+    time_t now = time(0);
+    char* dt = ctime(&now);
+
+    ofstream myfile;
+    myfile.open("score.txt", ios::app);
+
+    myfile << dt << "Difficulty: " << difficulty.toStdString() << ", Score: " << score.toStdString() << endl;
+
+    myfile.close();
 }
 
 QString Score::readScore() { 
