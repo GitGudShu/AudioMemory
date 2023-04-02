@@ -59,6 +59,7 @@ Menu::Menu(QWidget *parent) :
    scores = new QLabel(this);
    score = new Score();
    scores->setText(score->readScore());
+   scores->setStyleSheet(scoreStyle);
    scores->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
    // Set the button size
