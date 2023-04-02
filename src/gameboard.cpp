@@ -261,3 +261,17 @@ void GameBoard::displayWinMessageBox(){
         emit backToMenu();
     }
 }
+
+void GameBoard::displayTimeUpMessageBox(){
+   // create a message box with a "Return to Menu" button
+   QMessageBox messageBox;
+    messageBox.setText("Sorry pal, your time is up...");
+    messageBox.setStandardButtons(QMessageBox::Retry | QMessageBox::Close);
+    messageBox.setDefaultButton(QMessageBox::Retry);
+    int ret = messageBox.exec();
+    if (ret == QMessageBox::Retry) {
+        emit retryGame();
+    } else {
+        emit backToMenu();
+    }
+}

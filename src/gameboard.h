@@ -29,21 +29,29 @@ private slots:
     void updateTimerBar()
    {
       int currentValue = timerBar->value();
-      if (currentValue == 100 || win) {
+      if (currentValue == 100) {
          // Time is up!
          timer->stop();
-         timeScore = QString::number(currentValue);
+         win = false;
+         displayTimeUpMessageBox();
+         // TODO: Handle the end of the game
+      }
+      else if(win){
+        // Time is up!
+         timer->stop();
+         timeScore = QString::number(100 - currentValue);
          qDebug() << timeScore;
          win = false;
          //emit(winScore(difficulty, timeScore));
          score = new Score();
          score->writeScore(difficulty,timeScore);
-         // TODO: Handle the end of the game
-      } else {
+      } 
+      else {
          timerBar->setValue(currentValue + 1);
       }
    }
    void displayWinMessageBox();
+   void displayTimeUpMessageBox();
 
 private:
     QGridLayout* m_gridLayout;
