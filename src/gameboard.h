@@ -37,12 +37,11 @@ private slots:
          // TODO: Handle the end of the game
       }
       else if(win){
-        // Time is up!
+        // you win
          timer->stop();
          timeScore = QString::number(100 - currentValue);
          qDebug() << timeScore;
          win = false;
-         //emit(winScore(difficulty, timeScore));
          score = new Score();
          score->writeScore(difficulty,timeScore);
       } 
