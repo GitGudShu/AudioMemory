@@ -28,6 +28,7 @@ class Menu : public QWidget
     QPushButton *startButton;
     QPushButton *exitButton;
     QLabel *scores;
+    QLabel *title;
     QGridLayout *layout;
     QLabel *backgroundLabel;
     int difficultyLevel = 1;
@@ -39,6 +40,7 @@ class Menu : public QWidget
    QString buttonStyle;
    QString comboBStyle;
    QString scoreStyle;
+   QString titleStyle;
 };
 
 #endif // WINDOW_H
