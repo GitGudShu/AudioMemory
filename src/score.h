@@ -1,19 +1,12 @@
-//
-// Created by aurel on 18/03/2023.
-//
+#ifndef SCORE_H
+#define SCORE_H
 
-#ifndef AUDIOMEMORY_SCORE_H
-#define AUDIOMEMORY_SCORE_H
-#include <string>
 #include <QString>
-#include <iostream>
-#include <fstream>
 
 class Score {
-    public:
-        int writeScore(float score);
-        void readScore(QString tab);
+public:
+    static int writeScore(float score);
+    static QString readScore();
 };
 
-
-#endif //AUDIOMEMORY_SCORE_H
+#endif // SCORE_H

@@ -57,10 +57,8 @@ Menu::Menu(QWidget *parent) :
 
    // Create and set the score box
    scores = new QLabel(this);
-   QString tab = "Le score sera ici granted Aurélien make it work ;)";
    score = new Score();
-   //score->readScore(tab);
-   scores->setText(tab);
+   scores->setText(score->readScore());
    scores->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
    // Set the button size

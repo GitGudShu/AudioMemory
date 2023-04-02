@@ -1,25 +1,25 @@
-//
-// Created by aurel on 18/03/2023.
-//
-
 #include "score.h"
 #include <QString>
 #include <iostream>
 #include <fstream>
 using namespace std;
 
-int writeScore(float score){
-    ofstream myfile;
-    myfile.open("score.txt");
-    myfile << to_string(score)+"\n";
-    myfile.close();
+int Score::writeScore(float score) {
+    ofstream myfile("score.txt"); 
+    myfile << to_string(score) << "\n"; 
+    myfile.close(); 
     return 0;
 }
 
-void readScore(QString tab) {
-    tab.clear();
-    ofstream file;
-    file.open("score.txt");
-    tab << file;
-    file.close();
+QString Score::readScore() { 
+    QString tab;
+    ifstream file("score.txt"); 
+    if (file.is_open()) {
+        string line;
+        while (getline(file, line)) {
+            tab += QString::fromStdString(line) + "\n";
+        }
+        file.close(); 
+    }
+    return tab;
 }
