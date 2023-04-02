@@ -219,6 +219,17 @@ void GameBoard::checkForWin(QString audioPath, QPushButton *button){
          qDebug() << "yorokobe shonen";
          for(int i=0;i<2;i++){
             selectedButton[i]->setEnabled(true);
+            QPixmap cardImage;
+            if(difficulty == "1"){
+               cardImage = QPixmap(":/assets/image/bronze.jpeg");
+            }
+            else if(difficulty == "2"){
+               cardImage = QPixmap(":/assets/image/silver.jpeg");
+            }
+            else{
+               cardImage = QPixmap(":/assets/image/gold.jpg");
+            }
+            selectedButton[i]->setIcon(QIcon(cardImage));
          }
       }
       clickedButton = nullptr;
@@ -228,6 +239,8 @@ void GameBoard::checkForWin(QString audioPath, QPushButton *button){
 
 void GameBoard::buttonAudio(bool click, QString audioPath, QPushButton *button){
    selectedButton.append(button);
+   QPixmap cardImage(":/assets/image/front.jpeg");
+   button->setIcon(QIcon(cardImage));
     if(click){
       playAudio(audioPath);
       checkForWin(audioPath, button);
