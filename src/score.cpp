@@ -45,8 +45,7 @@ QString Score::readScore() {
         // sort scores in descending order
         sort(scores.rbegin(), scores.rend());
         for(int i=0;i<3;i++){
-            cout << scores[i].first;
-            cout << scores[i].second+"\n";
+            cout << "Score: "<< scores[i].first << " line: "<< scores[i].second+"\n";
         }
         // get the top 5 scores
         int n = min(5, (int)scores.size());
