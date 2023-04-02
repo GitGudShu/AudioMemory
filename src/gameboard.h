@@ -22,6 +22,7 @@ signals:
     void winScore(QString, QString);
 private slots:
     void setupBackground(int, int);
+    void displayBox(QString);
     void playAudio(QString);
     void buttonAudio(bool, QString, QPushButton*);
     void checkForWin(QString, QPushButton*);

@@ -241,10 +241,10 @@ void GameBoard::buttonAudio(bool click, QString audioPath, QPushButton *button){
     }
 }
 
-void GameBoard::displayWinMessageBox(){
-   // create a message box with a "Return to Menu" button
+void GameBoard::displayBox(QString mess){
+   // create a message box
    QMessageBox messageBox;
-    messageBox.setText("Congratulations! You have won the game!");
+    messageBox.setText(mess);
     messageBox.setStandardButtons(QMessageBox::Retry | QMessageBox::Close);
     messageBox.setDefaultButton(QMessageBox::Retry);
     int ret = messageBox.exec();
@@ -255,16 +255,14 @@ void GameBoard::displayWinMessageBox(){
     }
 }
 
+void GameBoard::displayWinMessageBox(){
+   // create a message box when win is achieved
+   QString mess = "Congratulations! You have won the game!";
+   displayBox(mess);
+}
+
 void GameBoard::displayTimeUpMessageBox(){
    // create a message if the time is up
-   QMessageBox messageBox;
-    messageBox.setText("Sorry pal, your time is up...");
-    messageBox.setStandardButtons(QMessageBox::Retry | QMessageBox::Close);
-    messageBox.setDefaultButton(QMessageBox::Retry);
-    int ret = messageBox.exec();
-    if (ret == QMessageBox::Retry) {
-        emit retryGame();
-    } else {
-        emit backToMenu();
-    }
+   QString mess = "You have run out of time";
+   displayBox(mess);
 }
