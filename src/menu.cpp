@@ -40,7 +40,7 @@ Menu::Menu(QWidget *parent) :
    buttonStyle = "font-size: 30px; font-family: Verdana; padding: 10px; border:4px solid #ffd700; border-radius:10px; background-color:#234e98; color:white; font-weight:bold;";
    comboBStyle = "QComboBox { font-size: 30px; padding: 10px; border: 4px solid #ffd700; border-radius: 10px; background-color: #234e98; color: white; font-weight: bold; }"
                      "QComboBox QAbstractItemView { font-size: 30px; border:4px solid #ffd700; background-color: #234e98; color: white; selection-background-color: #ffd700; }";
-   scoreStyle = "font-size: 12px; font-family: Verdana; padding: 2px; border:6px solid #ffd700; border-radius:10px; background-color:#234e98; color:white;";
+   scoreStyle = "font-size: 28px; font-family: Verdana; padding: 2px; border:6px solid #ffd700; border-radius:10px; background-color:#234e98; color:white;";
    
    // Buttons
    startButton = new QPushButton(tr("START"), this);
@@ -78,14 +78,14 @@ Menu::Menu(QWidget *parent) :
   connect(levelComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Menu::changeDifficulty);
   
   layout = new QGridLayout(this);
-  layout->addWidget(scores, 1, 0, 2, 1, Qt::AlignHCenter | Qt::AlignVCenter);
+  layout->addWidget(scores, 1, 0, 2, 1, Qt::AlignBottom | Qt::AlignVCenter);
   layout->addWidget(startButton, 1, 1, 1, 1, Qt::AlignHCenter | Qt::AlignVCenter);
   layout->addWidget(levelComboBox, 2, 1, 1, 1, Qt::AlignHCenter | Qt::AlignVCenter);
   layout->addWidget(exitButton, 3, 1, 1, 1, Qt::AlignHCenter | Qt::AlignVCenter);
   layout->setContentsMargins(1, 1, 1, 1);
 
   layout->setAlignment(Qt::AlignCenter);
-  layout->setHorizontalSpacing(width * 0.25); // 5% of window width
+  layout->setHorizontalSpacing(width * 0.10); // 5% of window width
   layout->setVerticalSpacing(width * 0.025); // 5% of window height
  }
 
