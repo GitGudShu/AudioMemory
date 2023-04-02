@@ -109,5 +109,6 @@ Menu::Menu(QWidget *parent) :
  void Menu::showMenu()
 {
     this->show();
+    scores->setText(score->readScore());
     gameBoard->hide();
 }
