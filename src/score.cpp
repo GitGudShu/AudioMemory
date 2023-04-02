@@ -44,14 +44,11 @@ QString Score::readScore() {
 
         // sort scores in descending order
         sort(scores.rbegin(), scores.rend());
-
         // get the top 5 scores
         int n = min(5, (int)scores.size());
         vector<pair<double, string>> top_scores(scores.begin(), scores.begin() + n);
-
         // sort the top 5 scores in descending order again
         sort(top_scores.rbegin(), top_scores.rend());
-
         // build a string with the top 5 scores
         QString tab;
         for (int i = 0; i < n; i++) {
