@@ -15,8 +15,6 @@ GameBoard::GameBoard(QWidget *parent, int difficultyLevel) : QWidget(parent)
    clickedButton = nullptr;
    cardNumber = 6*difficultyLevel;
    count = 0;
-   selectedButton;
-   winnedButton;
 
 
    // Window parameters
