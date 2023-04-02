@@ -14,6 +14,7 @@ GameBoard::GameBoard(QWidget *parent, int difficultyLevel) : QWidget(parent)
    player = new QMediaPlayer(this);
    clickedButton = nullptr;
    cardNumber = 6*difficultyLevel;
+   difficulty = QString::number(difficultyLevel);
    count = 0;
 
 

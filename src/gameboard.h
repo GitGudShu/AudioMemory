@@ -8,6 +8,7 @@
 #include <QLabel>
 #include <QProgressBar>
 #include <QTimer>
+#include "score.h"
 
 class GameBoard : public QWidget
 {
@@ -17,6 +18,7 @@ public:
 signals:
     void buttonClicked(bool, QString, QPushButton*);
     void backToMenu();
+    void winScore(QString, QString);
 private slots:
     void setupBackground(int, int);
     void playAudio(QString);
@@ -32,6 +34,9 @@ private slots:
          timeScore = QString::number(currentValue);
          qDebug() << timeScore;
          win = false;
+         //emit(winScore(difficulty, timeScore));
+         score = new Score();
+         score->writeScore(difficulty,timeScore);
          // TODO: Handle the end of the game
       } else {
          timerBar->setValue(currentValue + 1);
@@ -55,6 +60,8 @@ private:
     QList<QPushButton*> selectedButton;
     QList<QPushButton*> winnedButton;
     int count;
+    Score *score;
+    QString difficulty;
 };
 
 #endif // GAMEBOARD_H

@@ -58,7 +58,6 @@ Menu::Menu(QWidget *parent) :
    // Create and set the score box
    scores = new QLabel(this);
    score = new Score();
-   score->writeScore("2", "100");
    scores->setText(score->readScore());
    scores->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
