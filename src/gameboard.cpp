@@ -40,8 +40,8 @@ GameBoard::GameBoard(QWidget *parent, int difficultyLevel) : QWidget(parent)
       cardLayout->setVerticalSpacing(5);
       qDebug() << "Spacing 2";
    }else{ 
-      cardLayout->setSpacing(5);
-      cardLayout->setVerticalSpacing(10);
+      cardLayout->setSpacing(3);
+      cardLayout->setVerticalSpacing(5);
       qDebug() << "Spacing 3";
    }
 
@@ -79,7 +79,7 @@ GameBoard::GameBoard(QWidget *parent, int difficultyLevel) : QWidget(parent)
             cardButton->setFixedSize(width * 0.1, height * 0.2);
             qDebug() << "size 2";
          }else{ 
-            cardButton->setFixedSize(width * 0.1, height * 0.15);
+            cardButton->setFixedSize(width * 0.1, height * 0.18);
             qDebug() << "size 3";
          }
 
@@ -116,8 +116,8 @@ GameBoard::GameBoard(QWidget *parent, int difficultyLevel) : QWidget(parent)
       }
    } else if (difficultyLevel == 2) {
       for (int i = 0; i < cardNumber; i++) {
-         int row = i / 6;
-         int col = i % 6;
+         int row = i / 4;
+         int col = i % 4;
          cardLayout->addWidget(cardButtons[i], row, col, Qt::AlignCenter);
       }
    } else {
@@ -136,11 +136,32 @@ GameBoard::GameBoard(QWidget *parent, int difficultyLevel) : QWidget(parent)
    timerBar = new QProgressBar(this);
    timerBar->setRange(0, 100); // Set the range of the progress bar to 0-100
    timerBar->setValue(0); // Set the initial value of the progress bar to 0
-   cardLayout->addWidget(timerBar, 3, 0, 1, 3); // Add the progress bar to the layout
+   // Add the progress bar to the layout
+   if(difficultyLevel == 1){
+      cardLayout->addWidget(timerBar, 3, 0, 1, 3);
+   }
+   else if(difficultyLevel == 2){
+      cardLayout->addWidget(timerBar, 3, 0, 1, 4);
+   }
+   else{
+      cardLayout->addWidget(timerBar, 3, 0, 1, 6);
+   }
 
    // Add some spaces on the edges
-   int verticalSpace = height * 0.1;
-   int horizontalSpace = width * 0.2;
+   int verticalSpace;
+   int horizontalSpace;
+   if(difficultyLevel == 1){
+      verticalSpace = height * 0.1;
+      horizontalSpace = width * 0.2;
+   }
+   else if(difficultyLevel == 2){
+      verticalSpace = height * 0.15;
+      horizontalSpace = width * 0.2;
+   }
+   else{
+      verticalSpace = height * 0.15;
+      horizontalSpace = width * 0.2;
+   }
    
    cardLayout->setContentsMargins(horizontalSpace, verticalSpace, horizontalSpace, verticalSpace);
 
