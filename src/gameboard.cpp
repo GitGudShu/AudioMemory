@@ -63,16 +63,19 @@ GameBoard::GameBoard(QWidget *parent, int difficultyLevel) : QWidget(parent)
    for (int i = 0; i < cardNumber/2; i++) {
       for (int j = 0; j < 2; j++) {
          QPushButton *cardButton = new QPushButton(this);
+         QPixmap cardImage;
 
          if (difficultyLevel == 1){
             cardButton->setFixedSize(width * 0.15, height * 0.25);
+            cardImage = QPixmap(":/assets/image/bronze.jpeg");
          }else if (difficultyLevel == 2){
             cardButton->setFixedSize(width * 0.1, height * 0.2);
+            cardImage = QPixmap(":/assets/image/silver.jpeg");
          }else{ 
             cardButton->setFixedSize(width * 0.1, height * 0.18);
+            cardImage = QPixmap(":/assets/image/gold.jpg");
          }
 
-         QPixmap cardImage(":/assets/image/gold.jpg");
          if (cardImage.isNull()) 
             qDebug() << "Error: failed to load card image";
          else 
