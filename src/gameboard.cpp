@@ -17,7 +17,6 @@ GameBoard::GameBoard(QWidget *parent, int difficultyLevel) : QWidget(parent)
    difficulty = QString::number(difficultyLevel);
    count = 0;
 
-
    // Window parameters
    setWindowTitle("FGO Audio Memory");
    QRect screenGeometry = QApplication::desktop()->screenGeometry();
@@ -202,21 +201,16 @@ void GameBoard::checkForWin(QString audioPath, QPushButton *button){
    }
    else{
       if(clickedButton == audioPath){
-         qDebug() << "GG WELL PLAYED";
          for(int i=0;i<2;i++){
             winnedButton.append(selectedButton[i]);
             count++;
          }
-         qDebug() << count;
-         qDebug() << cardNumber;
          if(count == cardNumber){
-            qDebug() << "YOU WIN GG BROOOOO";
             win = true;
             displayWinMessageBox();
          }
       }
       else{
-         qDebug() << "yorokobe shonen";
          for(int i=0;i<2;i++){
             selectedButton[i]->setEnabled(true);
             QPixmap cardImage;
@@ -262,7 +256,7 @@ void GameBoard::displayWinMessageBox(){
 }
 
 void GameBoard::displayTimeUpMessageBox(){
-   // create a message box with a "Return to Menu" button
+   // create a message if the time is up
    QMessageBox messageBox;
     messageBox.setText("Sorry pal, your time is up...");
     messageBox.setStandardButtons(QMessageBox::Retry | QMessageBox::Close);

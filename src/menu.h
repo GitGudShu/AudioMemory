@@ -5,6 +5,7 @@
 #include <QWidget>
 #include <QPushButton>
 #include <QGridLayout>
+#include <QComboBox>
 #include <QLabel>
 #include <gameboard.h>
 #include <score.h>
@@ -27,6 +28,7 @@ class Menu : public QWidget
  private:
     QPushButton *startButton;
     QPushButton *exitButton;
+    QComboBox *levelComboBox;
     QLabel *scores;
     QLabel *title;
     QGridLayout *layout;

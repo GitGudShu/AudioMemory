@@ -25,6 +25,8 @@ private slots:
     void playAudio(QString);
     void buttonAudio(bool, QString, QPushButton*);
     void checkForWin(QString, QPushButton*);
+    void displayWinMessageBox();
+    void displayTimeUpMessageBox();
     void updateTimerBar()
    {
       int currentValue = timerBar->value();
@@ -33,10 +35,9 @@ private slots:
          timer->stop();
          win = false;
          displayTimeUpMessageBox();
-         // TODO: Handle the end of the game
       }
       else if(win){
-        // you win
+        // you won
          timer->stop();
          timeScore = QString::number(100 - currentValue);
          qDebug() << "Time score:" << timeScore;
@@ -48,27 +49,25 @@ private slots:
          timerBar->setValue(currentValue + 1);
       }
    }
-   void displayWinMessageBox();
-   void displayTimeUpMessageBox();
 
 private:
+    QMediaPlayer *player;
+    QPushButton* buttonSelected;
     QGridLayout* m_gridLayout;
 	QLabel *backgroundLabel;
     QString audioPath;
-    bool click;
-    bool win = false;
     QString timeScore;
-    QMediaPlayer *player;
-    QPushButton* buttonSelected;
     QString clickedButton;
+    QString difficulty;
     QProgressBar *timerBar;
     QTimer *timer;
-    int cardNumber;
     QList<QPushButton*> selectedButton;
     QList<QPushButton*> winnedButton;
-    int count;
     Score *score;
-    QString difficulty;
+    bool click;
+    bool win = false;
+    int count;
+    int cardNumber;
 };
 
 #endif // GAMEBOARD_H
