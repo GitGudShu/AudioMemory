@@ -20,38 +20,45 @@ void Score::writeScore(QString difficulty, QString score) {
         myfile.close(); 
         myfile.open("score.txt", ios::app); 
     }
-    myfile << dt << ", Difficulty: " << diff << ", Score: " << scr << endl;
+    myfile << dt << ", Difficulty: " << diff << ", Score: " << scr * diff<< endl;
     myfile.close();
 }
 
 
-QString Score::readScore() { 
+QString Score::readScore() {
     vector<pair<double, string>> scores; // couples are easier to deal with trust me
-    ifstream file("score.txt"); 
+    ifstream file("score.txt");
     if (file.is_open()) {
         string line;
         while (getline(file, line)) {
             string::size_type colon_pos = line.find(':');
             string::size_type comma_pos = line.find(',');
             if (colon_pos != string::npos && comma_pos != string::npos) {
-                // extract the difficulty and score from the line
-                string diff_str = line.substr(colon_pos + 2, comma_pos - colon_pos - 2);
+                // extract the score from the line
                 string score_str = line.substr(line.find(':', comma_pos) + 2);
-                int diff = stoi(diff_str);
                 int score = stoi(score_str);
-                if (diff != 0) {
-                    double ratio = (double)score / diff;
-                    scores.push_back(make_pair(ratio, line));
-                }
+                scores.push_back(make_pair((double)score, line));
             }
         }
-        file.close(); 
+        file.close();
+
+        // sort scores in descending order
+        sort(scores.rbegin(), scores.rend());
+
+        // get the top 5 scores
+        int n = min(5, (int)scores.size());
+        vector<pair<double, string>> top_scores(scores.begin(), scores.begin() + n);
+
+        // sort the top 5 scores in descending order again
+        sort(top_scores.rbegin(), top_scores.rend());
+
+        // build a string with the top 5 scores
+        QString tab;
+        for (int i = 0; i < n; i++) {
+            tab += QString::fromStdString(top_scores[i].second) + "\n";
+        }
+        return tab;
+    } else {
+        return "Unable to open score file.";
     }
-    sort(scores.rbegin(), scores.rend()); 
-    int n = min(5, (int)scores.size()); // only display the top 5 scores
-    QString tab;
-    for (int i = 0; i < n; i++) {
-        tab += QString::fromStdString(scores[i].second) + "\n";
-    }
-    return tab;
 }
