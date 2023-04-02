@@ -32,10 +32,10 @@ QString Score::readScore() {
         string line;
         while (getline(file, line)) {
             string::size_type colon_pos = line.find(':');
-            string::size_type comma_pos = line.find(',');
-            if (colon_pos != string::npos && comma_pos != string::npos) {
+            string::size_type score_pos = line.find("Score:");
+            if (colon_pos != string::npos && score_pos != string::npos) {
                 // extract the score from the line
-                string score_str = line.substr(line.find(':', comma_pos) + 2);
+                string score_str = line.substr(score_pos + 7); // add 7 to skip "Score: "
                 int score = stoi(score_str);
                 scores.push_back(make_pair((double)score, line));
             }
@@ -44,7 +44,7 @@ QString Score::readScore() {
 
         // sort scores in descending order
         sort(scores.rbegin(), scores.rend());
-        for(int i=0;i<3;i++){
+        for(int i=0;i<6;i++){
             cout << "Score: "<< scores[i].first << " line: "<< scores[i].second+"\n";
         }
         // get the top 5 scores
