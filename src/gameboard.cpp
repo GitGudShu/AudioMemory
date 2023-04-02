@@ -33,15 +33,12 @@ GameBoard::GameBoard(QWidget *parent, int difficultyLevel) : QWidget(parent)
    // Add some spacing between the cards
    if (difficultyLevel == 1){
       cardLayout->setSpacing(20); 
-      qDebug() << "Spacing 1";
    }else if (difficultyLevel == 2){
       cardLayout->setSpacing(5);
       cardLayout->setVerticalSpacing(5);
-      qDebug() << "Spacing 2";
    }else{ 
       cardLayout->setSpacing(3);
       cardLayout->setVerticalSpacing(5);
-      qDebug() << "Spacing 3";
    }
 
    QString audioPath = QCoreApplication::applicationDirPath() + "/../assets/audio/";
@@ -57,13 +54,9 @@ GameBoard::GameBoard(QWidget *parent, int difficultyLevel) : QWidget(parent)
       cardAudios << filePath ;
    }
 
-   displayCardAudios(cardAudios);
-
    // Shuffle the cards randomly
    QRandomGenerator generator(QTime::currentTime().msec());
    std::shuffle(cardAudios.begin(), cardAudios.end(), generator);
-
-   displayCardAudios(cardAudios);
 
    QList<QPushButton*> cardButtons;
 
@@ -73,13 +66,10 @@ GameBoard::GameBoard(QWidget *parent, int difficultyLevel) : QWidget(parent)
 
          if (difficultyLevel == 1){
             cardButton->setFixedSize(width * 0.15, height * 0.25);
-            qDebug() << "size 1";
          }else if (difficultyLevel == 2){
             cardButton->setFixedSize(width * 0.1, height * 0.2);
-            qDebug() << "size 2";
          }else{ 
             cardButton->setFixedSize(width * 0.1, height * 0.18);
-            qDebug() << "size 3";
          }
 
          QPixmap cardImage(":/assets/image/gold.jpg");
@@ -238,13 +228,6 @@ void GameBoard::buttonAudio(bool click, QString audioPath, QPushButton *button){
     if(click){
       playAudio(audioPath);
       checkForWin(audioPath, button);
-    }
-}
-
-void GameBoard::displayCardAudios(QStringList cardAudios) {
-    qDebug() << "Card Audios:";
-    for (const auto& audio : cardAudios) {
-        qDebug() << audio;
     }
 }
 

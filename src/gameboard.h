@@ -24,7 +24,6 @@ private slots:
     void setupBackground(int, int);
     void playAudio(QString);
     void buttonAudio(bool, QString, QPushButton*);
-    void displayCardAudios(QStringList);
     void checkForWin(QString, QPushButton*);
     void updateTimerBar()
    {
@@ -40,7 +39,7 @@ private slots:
         // you win
          timer->stop();
          timeScore = QString::number(100 - currentValue);
-         qDebug() << timeScore;
+         qDebug() << "Time score:" << timeScore;
          win = false;
          score = new Score();
          score->writeScore(difficulty,timeScore);
@@ -57,7 +56,7 @@ private:
 	QLabel *backgroundLabel;
     QString audioPath;
     bool click;
-    bool win;
+    bool win = false;
     QString timeScore;
     QMediaPlayer *player;
     QPushButton* buttonSelected;
