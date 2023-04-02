@@ -40,8 +40,8 @@ Menu::Menu(QWidget *parent) :
    buttonStyle = "font-size: 30px; font-family: Verdana; padding: 10px; border:4px solid #ffd700; border-radius:10px; background-color:#234e98; color:white; font-weight:bold;";
    comboBStyle = "QComboBox { font-size: 30px; padding: 10px; border: 4px solid #ffd700; border-radius: 10px; background-color: #234e98; color: white; font-weight: bold; }"
                      "QComboBox QAbstractItemView { font-size: 30px; border:4px solid #ffd700; background-color: #234e98; color: white; selection-background-color: #ffd700; }";
-   scoreStyle = "font-size: 25px; font-family: Verdana; padding: 2px; border:6px solid #ffd700; border-radius:10px; background-color:#234e98; color:white; font-weight:bold;";
-    
+   scoreStyle = "font-size: 12px; font-family: Verdana; padding: 2px; border:6px solid #ffd700; border-radius:10px; background-color:#234e98; color:white;";
+   
    // Buttons
    startButton = new QPushButton(tr("START"), this);
    startButton->setMinimumHeight(40);

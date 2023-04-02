@@ -30,6 +30,7 @@ class Menu : public QWidget
     QLabel *scores;
     QGridLayout *layout;
     QLabel *backgroundLabel;
+    int difficultyLevel = 1;
 
    GameBoard *gameBoard; 
    Score *score;
@@ -38,7 +39,6 @@ class Menu : public QWidget
    QString buttonStyle;
    QString comboBStyle;
    QString scoreStyle;
-   int difficultyLevel = 1;
 };
 
 #endif // WINDOW_H
